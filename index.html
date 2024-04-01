@@ -558,31 +558,69 @@
 
                 <div class="contact__content">
                     <h3 class="contact__title contact__title-form">Write us your Message</h3>
-
-                    <form action="" class="contact__form">
+                    <form id="contactForm" class="contact__form">
                         <div class="contact__form-div">
-                            <label for="" class="contact__form-tag">Name</label>
-                            <input type="text" placeholder="Enter name" class="contact__form-input">
+                            <label for="nameInput" class="contact__form-tag">Name</label>
+                            <input type="text" id="nameInput" placeholder="Enter name" class="contact__form-input">
                         </div>
-
+                
                         <div class="contact__form-div">
-                            <label for="" class="contact__form-tag">Mail</label>
-                            <input type="text" placeholder="Enter email" class="contact__form-input">
+                            <label for="emailInput" class="contact__form-tag">Mail</label>
+                            <input type="text" id="emailInput" placeholder="Enter email" class="contact__form-input">
                         </div>
-
+                
                         <div class="contact__form-div contact__form-area">
-                            <label for="" class="contact__form-tag">Message</label>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Write your Message"
-                                class="contact__form-input "></textarea>
+                            <label for="messageInput" class="contact__form-tag">Message</label>
+                            <textarea id="messageInput" cols="30" rows="10" placeholder="Write your Message" class="contact__form-input"></textarea>
                         </div>
-
-
-                        <button class="button">
-                            Send Message
-                        </button>
+                
+                        <button type="submit" class="button">Send Message</button>
                     </form>
-
                 </div>
+                
+                
+                <script>
+                    document.getElementById('contactForm').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Prevent default form submission
+                        
+                        // Gather data from form fields
+                        const name = document.getElementById('nameInput').value;
+                        const email = document.getElementById('emailInput').value;
+                        const message = document.getElementById('messageInput').value;
+                        
+                        // Construct JSON object
+                        const formData = {
+                            "name": name,
+                            "email": email,
+                            "message": message
+                        };
+                        
+                        // Send POST request to API
+                        fetch('http://thebrc.onrender.com/send/mail', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Success:', data);
+                            // Optionally, display a success message to the user
+                            alert('Message sent successfully!');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // Optionally, display an error message to the user
+                            alert('An error occurred. Please try again later.');
+                        });
+                    });
+                </script>
 
         </section>
     </main>
