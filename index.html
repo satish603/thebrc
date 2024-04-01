@@ -577,7 +577,7 @@
                         <button type="submit" class="button">Send Message</button>
                     </form>
                 </div>
-                
+
                 
                 <script>
                     document.getElementById('contactForm').addEventListener('submit', function(event) {
@@ -596,7 +596,7 @@
                         };
                         
                         // Send POST request to API
-                        fetch('http://thebrc.onrender.com/send/mail', {
+                        fetch('https://thebrc.onrender.com/send/mail', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
