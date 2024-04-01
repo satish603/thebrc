@@ -1,6 +1,9 @@
 package com.thebrchub.rest.services;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -21,29 +24,37 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 
-	@Override
-	public void sendEmail(EmailEntity emailEntity) {
-		String replyTo = "thebrcexplorers@gmail.com";
-		String[] bcc = { "thebrcexplorers@gmail.com", "shivanandburli0702@gmail.com", "srikanthrajhk9611@gmail.com",
-				"satishchauhan603@gmail.com" };
-		String emailSubject = "Confirmation Mail";
-		String htmlContent = generateHtmlContent(emailEntity.getName(),emailEntity.getMessage());
+	@Value("${brc.members.mail}")
+	private String[] brcMembersMail;
 
-		MimeMessage message = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message);
+	@Value("${brc.mail}")
+	private String brcMail;
+
+	@Override
+	public void sendEmail(EmailEntity emailEntity) throws Exception {
+
+		String replyTo = brcMail;
+		String[] bcc = brcMembersMail;
+		String emailSubject = "Confirmation Mail";
+
 		try {
+			String htmlContent = generateHtmlContent(emailEntity.getName(), emailEntity.getMessage());
+
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
+
 			helper.setTo(emailEntity.getEmail());
 			helper.setReplyTo(replyTo);
 			helper.setBcc(bcc);
 			helper.setSubject(emailSubject);
 			helper.setText(htmlContent, true);
 			mailSender.send(message);
-		} catch (MessagingException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new RuntimeException("Error sending mail", e);
 		}
 	}
 
-	private String generateHtmlContent(String name,String message) {
+	private String generateHtmlContent(String name, String message) {
 		Context context = new Context();
 		context.setVariable("name", name);
 		context.setVariable("message", message);
