@@ -1,7 +1,5 @@
 package com.thebrchub.rest.services;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,7 +10,6 @@ import org.thymeleaf.context.Context;
 
 import com.thebrchub.rest.entities.EmailEntity;
 
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
