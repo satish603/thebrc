@@ -30,18 +30,17 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendEmail(EmailEntity emailEntity) throws Exception {
 
-		String replyTo = brcMail;
 		String[] bcc = brcMembersMail;
-		String emailSubject = "Confirmation Mail";
+		String emailSubject = "NEW FEEDBACK MESSAGE!!";
 
 		try {
-			String htmlContent = generateHtmlContent(emailEntity.getName(), emailEntity.getMessage());
+			String htmlContent = generateHtmlContent(emailEntity.getName(), emailEntity.getEmail(),
+					emailEntity.getMessage());
 
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
 
-			helper.setTo(emailEntity.getEmail());
-			helper.setReplyTo(replyTo);
+			helper.setTo(brcMail);
 			helper.setBcc(bcc);
 			helper.setSubject(emailSubject);
 			helper.setText(htmlContent, true);
@@ -51,9 +50,10 @@ public class EmailServiceImpl implements EmailService {
 		}
 	}
 
-	private String generateHtmlContent(String name, String message) {
+	private String generateHtmlContent(String name, String email, String message) {
 		Context context = new Context();
 		context.setVariable("name", name);
+		context.setVariable("email", email);
 		context.setVariable("message", message);
 		return templateEngine.process("emailTemplate", context);
 	}
