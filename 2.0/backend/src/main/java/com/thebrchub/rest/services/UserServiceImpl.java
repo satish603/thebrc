@@ -100,17 +100,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void resetPassword(UserEntity userEntity) throws Exception {
+	public void resetPassword(UserEntity userEntity, String otp) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
 
-		if (!userEntity.getCurrentOtp().equals(user.getCurrentOtp())) {
+		if (!otp.equalsIgnoreCase(user.getCurrentOtp())) {
 			throw new RuntimeException("OTP doesn't match");
 		}
 
 		user.setCurrentOtp(null);
-		user.setPassword(userEntity.getPassword()); // set encrypt
+		user.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		userRepo.save(user);
 
 	}
@@ -140,12 +140,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void sendOtp(UserEntity userEntity) throws Exception {
+	public void sendVerifyMail(UserEntity userEntity) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
 
 		String currentOtp = emailService.sendVerificationMail(user.getEmail());
+		user.setCurrentOtp(currentOtp);
+		userRepo.save(user);
+
+	}
+
+	@Override
+	public void sendOtp(UserEntity userEntity) throws Exception {
+
+		UserEntity user = userRepo.findById(userEntity.getEmail())
+				.orElseThrow(() -> new RuntimeException("user not found"));
+
+		String currentOtp = emailService.sendOtp(userEntity.getEmail());
 		user.setCurrentOtp(currentOtp);
 		userRepo.save(user);
 

@@ -1,6 +1,8 @@
 package com.thebrchub.rest.entities;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,131 +20,144 @@ import jakarta.persistence.Enumerated;
 @Document(collection = "users")
 public class UserEntity implements UserDetails {
 
-    private String name;
+	private String name;
 
-    @Id
-    @JsonProperty("email")
-    private String email;
+	@Id
+	@JsonProperty("email")
+	private String email;
 
-    private String mobile;
+	private String mobile;
 
-    private String password;
+	@JsonIgnore
+	private String password;
 
-    @JsonIgnore
-    private Boolean isMobileVerified;
+	@JsonIgnore
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
-    @JsonIgnore
-    private Boolean isEmailVerified;
+	@JsonProperty("events")
+	private Set<EventEntity> events = new HashSet<EventEntity>();
 
-    @JsonIgnore
-    private String currentOtp;
+	@JsonIgnore
+	private Boolean isMobileVerified;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+	@JsonIgnore
+	private Boolean isEmailVerified;
 
-    public UserEntity() {
-    }
+	@JsonIgnore
+	private String currentOtp;
 
-    public UserEntity(String name, String email, String mobile, String password) {
-        this.name = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.password = password;
-    }
+	public UserEntity() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public UserEntity(String name, String email, String mobile, String password) {
+		this.name = name;
+		this.email = email;
+		this.mobile = mobile;
+		this.password = password;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public Boolean getIsMobileVerified() {
-        return isMobileVerified;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setIsMobileVerified(Boolean isMobileVerified) {
-        this.isMobileVerified = isMobileVerified;
-    }
+	public Boolean getIsMobileVerified() {
+		return isMobileVerified;
+	}
 
-    public Boolean getIsEmailVerified() {
-        return isEmailVerified;
-    }
+	public void setIsMobileVerified(Boolean isMobileVerified) {
+		this.isMobileVerified = isMobileVerified;
+	}
 
-    public void setIsEmailVerified(Boolean isEmailVerified) {
-        this.isEmailVerified = isEmailVerified;
-    }
+	public Boolean getIsEmailVerified() {
+		return isEmailVerified;
+	}
 
-    public String getCurrentOtp() {
-        return currentOtp;
-    }
+	public void setIsEmailVerified(Boolean isEmailVerified) {
+		this.isEmailVerified = isEmailVerified;
+	}
 
-    public void setCurrentOtp(String currentOtp) {
-        this.currentOtp = currentOtp;
-    }
+	public String getCurrentOtp() {
+		return currentOtp;
+	}
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
-    }
+	public void setCurrentOtp(String currentOtp) {
+		this.currentOtp = currentOtp;
+	}
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return role.getAuthorities();
+	}
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
+	@Override
+	public String getUsername() {
+		return email;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	@Override
+	public String getPassword() {
+		return password;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    public Role getRole() {
-        return role;
-    }
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Set<EventEntity> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<EventEntity> events) {
+		this.events = events;
+	}
 
 }

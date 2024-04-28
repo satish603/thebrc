@@ -120,7 +120,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public void sendOtp(String email) throws Exception {
+	public String sendOtp(String email) throws Exception {
 
 		String emailSubject = "OTP for THE BRC HUB account";
 		String otp = generateOTP();
@@ -136,6 +136,8 @@ public class EmailServiceImpl implements EmailService {
 		} catch (Exception e) {
 			throw new RuntimeException("Error sending mail", e);
 		}
+
+		return otp;
 
 	}
 

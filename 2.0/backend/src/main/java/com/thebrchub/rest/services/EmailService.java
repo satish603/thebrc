@@ -8,6 +8,6 @@ public interface EmailService {
 
 	String sendVerificationMail(String email) throws Exception;
 	
-	void sendOtp(String email) throws Exception;
+	String sendOtp(String email) throws Exception;
 
 }

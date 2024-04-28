@@ -1,7 +1,5 @@
 package com.thebrchub.rest.controllers;
 
-import java.net.URLDecoder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +20,6 @@ import com.thebrchub.rest.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.websocket.server.PathParam;
 
 @Tag(name = "User Services", description = "APIs to invoke user services.")
 @RestController
@@ -45,7 +42,6 @@ public class UserController {
 	@Autowired
 	private HttpServletResponse response;
 
-	
 	private Authentication authentication = null;
 
 	@PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,7 +65,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(value = "/verify", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/verify/otp/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private ResponseEntity<?> verifyOtp(@RequestBody UserEntity userEntity) {
 		try {
 			userService.verifyOtp(userEntity);
@@ -90,10 +86,10 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(value = "/reset/password", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	private ResponseEntity<?> forgotPassword(@RequestBody UserEntity userEntity) {
+	@PostMapping(value = "/reset/password/{otp}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	private ResponseEntity<?> forgotPassword(@PathVariable("otp") String otp, @RequestBody UserEntity userEntity) {
 		try {
-			userService.resetPassword(userEntity);
+			userService.resetPassword(userEntity, otp);
 			return new ResponseEntity<>("Password reset succesfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -102,6 +98,17 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/send/verify/mail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	private ResponseEntity<?> sendVerifyMail(@RequestBody UserEntity userEntity) {
+		try {
+			userService.sendVerifyMail(userEntity);
+			return new ResponseEntity<>("sent succesfully!!", HttpStatus.OK);
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping(value = "/send/otp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private ResponseEntity<?> sendOtp(@RequestBody UserEntity userEntity) {
 		try {
 			userService.sendOtp(userEntity);
