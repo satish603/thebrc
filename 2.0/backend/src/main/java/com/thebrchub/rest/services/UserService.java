@@ -13,7 +13,7 @@ public interface UserService {
 
 	AuthenticationResponse logInUser(AuthenticationRequest request) throws Exception;
 
-	void resetPassword(UserEntity userEntity, String otp) throws Exception;
+	void resetPassword(RegisterRequest userEntity, String otp) throws Exception;
 
 	void sendVerifyMail(UserEntity userEntity) throws Exception;
 

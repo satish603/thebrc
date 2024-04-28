@@ -87,7 +87,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/reset/password/{otp}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	private ResponseEntity<?> forgotPassword(@PathVariable("otp") String otp, @RequestBody UserEntity userEntity) {
+	private ResponseEntity<?> forgotPassword(@PathVariable("otp") String otp, @RequestBody RegisterRequest userEntity) {
 		try {
 			userService.resetPassword(userEntity, otp);
 			return new ResponseEntity<>("Password reset succesfully!!", HttpStatus.OK);

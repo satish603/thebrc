@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void resetPassword(UserEntity userEntity, String otp) throws Exception {
+	public void resetPassword(RegisterRequest userEntity, String otp) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
