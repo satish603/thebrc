@@ -35,8 +35,8 @@ public class UserEntity implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@JsonProperty("events")
-	private Set<EventEntity> events = new HashSet<EventEntity>();
+	// @JsonProperty("events")
+	// private Set<EventEntity> events = new HashSet<EventEntity>();
 
 	@JsonIgnore
 	private Boolean isMobileVerified;
@@ -152,12 +152,12 @@ public class UserEntity implements UserDetails {
 		this.role = role;
 	}
 
-	public Set<EventEntity> getEvents() {
-		return events;
-	}
+	// public Set<EventEntity> getEvents() {
+	// 	return events;
+	// }
 
-	public void setEvents(Set<EventEntity> events) {
-		this.events = events;
-	}
+	// public void setEvents(Set<EventEntity> events) {
+	// 	this.events = events;
+	// }
 
 }

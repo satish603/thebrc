@@ -12,7 +12,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.thebrchub.rest.entities.EmailEntity;

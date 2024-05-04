@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.thebrchub.rest.config.LogoutService;
 import com.thebrchub.rest.entities.AuthenticationRequest;
 import com.thebrchub.rest.entities.RegisterRequest;
-import com.thebrchub.rest.entities.UserEntity;
 import com.thebrchub.rest.services.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,7 +46,8 @@ public class UserController {
 	@PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private ResponseEntity<?> addUser(@RequestBody RegisterRequest request) {
 		try {
-			return new ResponseEntity<>(userService.createUser(request), HttpStatus.OK);
+			userService.createUser(request);
+			return new ResponseEntity<>("user registration successful!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,10 +66,10 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/verify/otp/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	private ResponseEntity<?> verifyOtp(@RequestBody UserEntity userEntity) {
+	private ResponseEntity<?> verifyOtp(@RequestBody RegisterRequest userEntity) {
 		try {
 			userService.verifyOtp(userEntity);
-			return new ResponseEntity<>("Verified succesfully!!", HttpStatus.OK);
+			return new ResponseEntity<>("Verified successfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,7 +79,8 @@ public class UserController {
 	@PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private ResponseEntity<?> logIn(@RequestBody AuthenticationRequest request) {
 		try {
-			return new ResponseEntity<>(userService.logInUser(request), HttpStatus.OK);
+			userService.logInUser(request);
+			return new ResponseEntity<>("login successful!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,7 +91,7 @@ public class UserController {
 	private ResponseEntity<?> forgotPassword(@PathVariable("otp") String otp, @RequestBody RegisterRequest userEntity) {
 		try {
 			userService.resetPassword(userEntity, otp);
-			return new ResponseEntity<>("Password reset succesfully!!", HttpStatus.OK);
+			return new ResponseEntity<>("Password reset successfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,10 +99,10 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/send/verify/mail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	private ResponseEntity<?> sendVerifyMail(@RequestBody UserEntity userEntity) {
+	private ResponseEntity<?> sendVerifyMail(@RequestBody RegisterRequest userEntity) {
 		try {
 			userService.sendVerifyMail(userEntity);
-			return new ResponseEntity<>("sent succesfully!!", HttpStatus.OK);
+			return new ResponseEntity<>("mail sent successfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,10 +110,10 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/send/otp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	private ResponseEntity<?> sendOtp(@RequestBody UserEntity userEntity) {
+	private ResponseEntity<?> sendOtp(@RequestBody RegisterRequest userEntity) {
 		try {
 			userService.sendOtp(userEntity);
-			return new ResponseEntity<>("sent succesfully!!", HttpStatus.OK);
+			return new ResponseEntity<>("otp sent successfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -124,7 +125,7 @@ public class UserController {
 		try {
 			String trimmedUuid = (uuid != null && !uuid.trim().isEmpty()) ? uuid.trim() : null;
 			userService.verifyEmail(trimmedUuid);
-			return new ResponseEntity<>("user verified succesfully!!", HttpStatus.OK);
+			return new ResponseEntity<>("user verified successfully!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

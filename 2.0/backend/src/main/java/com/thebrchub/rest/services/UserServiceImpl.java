@@ -67,12 +67,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void verifyOtp(UserEntity userEntity) throws Exception {
+	public void verifyOtp(RegisterRequest userEntity) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
 
-		if (!userEntity.getCurrentOtp().equals(user.getCurrentOtp())) {
+		if (!userEntity.getOtp().equals(user.getCurrentOtp())) {
 			throw new RuntimeException("OTP doesn't match");
 		}
 
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void sendVerifyMail(UserEntity userEntity) throws Exception {
+	public void sendVerifyMail(RegisterRequest userEntity) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void sendOtp(UserEntity userEntity) throws Exception {
+	public void sendOtp(RegisterRequest userEntity) throws Exception {
 
 		UserEntity user = userRepo.findById(userEntity.getEmail())
 				.orElseThrow(() -> new RuntimeException("user not found"));
