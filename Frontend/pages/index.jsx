@@ -56,7 +56,7 @@ const Home = () => {
           aria-hidden
         />
         
-        {/* avatar */}
+        {/* UpcomingEventsSlider */}
         <motion.div
           variants={fadeIn("up", 0.5)}
           initial="hidden"
