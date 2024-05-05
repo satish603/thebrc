@@ -18,16 +18,39 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
 
-    // Simulate login process (replace with actual login logic)
-    setTimeout(() => {
-      console.log("Logging in with:", formData);
-      setIsLoading(false);
-    }, 1000);
-  };
+  //   // Simulate login process (replace with actual login logic)
+  //   setTimeout(() => {
+  //     console.log("Logging in with:", formData);
+  //     setIsLoading(false);
+  //   }, 1000);
+  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //API calls
+    const url="http://localhost:8087";
+    const response = await fetch(`${url}/signin`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "accept": "application/json"
+        },
+        body: JSON.stringify({ email: formData.email, password: formData.password })
+    });
+    const json = await response.json();
+    console.log(json)
+    if (json.success) {
+        localStorage.setItem("token", json.authtokenn);
+        navigate("/");
+        props.showAlert("Login Successful", "success");
+    }
+    else{
+        props.showAlert("Invalid Credentials", "danger");
+    }
+}
 
   return (
     <div className="h-full bg-primary/30">
