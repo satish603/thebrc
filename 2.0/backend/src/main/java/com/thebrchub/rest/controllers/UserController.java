@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thebrchub.rest.config.LogoutService;
 import com.thebrchub.rest.entities.AuthenticationRequest;
+import com.thebrchub.rest.entities.AuthenticationResponse;
 import com.thebrchub.rest.entities.RegisterRequest;
 import com.thebrchub.rest.services.UserService;
 
@@ -79,7 +80,8 @@ public class UserController {
 	@PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	private ResponseEntity<?> logIn(@RequestBody AuthenticationRequest request) {
 		try {
-			userService.logInUser(request);
+			AuthenticationResponse res = userService.logInUser(request);
+			response.setHeader("token", res.getAccessToken());
 			return new ResponseEntity<>("login successful!!", HttpStatus.OK);
 		} catch (Exception e) {
 			// e.printStackTrace();
