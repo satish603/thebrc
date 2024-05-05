@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="bg-primary/60 h-full flex">
       {/* particles */}
-      <ParticlesContainer />
+      {/* <ParticlesContainer /> */}
       {/* Left Side - Content */}
       <div className="w-1/2">
         <div className="w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10">

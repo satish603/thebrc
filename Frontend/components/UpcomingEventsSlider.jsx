@@ -30,7 +30,7 @@ const UpcomingEventsSlider = () => {
     <Swiper
       navigation
       pagination={{ clickable: true }}
-      className="h-[400px]"
+      className="h-[500px]"
     >
       {upcomingEvents.map((event, index) => (
         <SwiperSlide key={index}>
