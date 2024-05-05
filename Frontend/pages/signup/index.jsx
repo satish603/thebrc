@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -109,6 +110,19 @@ const Signup = () => {
               />
             </button>
           </motion.form>
+          <motion.div className="flex items-center justify-center mt-4">
+  <span className="mr-2">Registered?</span>
+  <motion.a
+    className="text-accent underline"
+    onClick={(e) => {
+      e.preventDefault();
+      // Handle Click here link click action here
+      console.log("Click here clicked!");
+    }}
+  >
+    <Link href="/login">Click here</Link> {/* Link to Login page */}
+  </motion.a>
+</motion.div>
         </div>
       </div>
     </div>

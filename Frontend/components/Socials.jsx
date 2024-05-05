@@ -12,33 +12,18 @@ import {
 export const socialData = [
   {
     name: "YouTube",
-    link: "https://youtube.com",
+    link: "https://www.youtube.com/@TheBRCExplorers",
     Icon: RiYoutubeLine,
   },
   {
     name: "Instagram",
-    link: "https://instagram.com",
+    link: "https://www.instagram.com/thebrcexplorers/",
     Icon: RiInstagramLine,
   },
   {
     name: "Facebook",
-    link: "https://facebook.com",
+    link: "https://www.facebook.com/people/The-BRC-Explorers/61557451671989/",
     Icon: RiFacebookLine,
-  },
-  {
-    name: "Dribbble",
-    link: "https://dribbble.com",
-    Icon: RiDribbbleLine,
-  },
-  {
-    name: "Pinterest",
-    link: "https://pinterest.com",
-    Icon: RiPinterestLine,
-  },
-  {
-    name: "Github",
-    link: "https://github.com/thebrchub/modern-portfolio",
-    Icon: RiGithubLine,
   },
 ];
 
