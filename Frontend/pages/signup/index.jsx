@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import { BrcHubApi } from "../../api/brcHubApi";
+
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +12,7 @@ const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "USER"
   });
 
   const handleChange = (event) => {
@@ -20,16 +23,30 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
 
-    // Simulate signup process (replace with actual signup logic)
-    setTimeout(() => {
-      console.log("Signing up with:", formData);
-      setIsLoading(false);
-    }, 1000);
+    await BrcHubApi.signUp(formData, (response) => {
+      console.log(response.data);
+      sendVerifyMail();
+    });
+
+    setIsLoading(false);
+
   };
+
+  const sendVerifyMail = async () => {
+
+    console.log("sending verification mail");
+    await BrcHubApi.sendVerificationMail(formData, (response) => {
+
+      // pop up success mail sent
+      console.log(response.data);
+    });
+  };
+
+
 
   return (
     <div className="h-full bg-primary/30">
@@ -111,18 +128,18 @@ const Signup = () => {
             </button>
           </motion.form>
           <motion.div className="flex items-center justify-center mt-4">
-  <span className="mr-2">Registered?</span>
-  <motion.a
-    className="text-accent underline"
-    onClick={(e) => {
-      e.preventDefault();
-      // Handle Click here link click action here
-      console.log("Click here clicked!");
-    }}
-  >
-    <Link href="/login">Click here</Link> {/* Link to Login page */}
-  </motion.a>
-</motion.div>
+            <span className="mr-2">Registered?</span>
+            <motion.a
+              className="text-accent underline"
+              onClick={(e) => {
+                e.preventDefault();
+                // Handle Click here link click action here
+                console.log("Click here clicked!");
+              }}
+            >
+              <Link href="/login">Click here</Link> {/* Link to Login page */}
+            </motion.a>
+          </motion.div>
         </div>
       </div>
     </div>

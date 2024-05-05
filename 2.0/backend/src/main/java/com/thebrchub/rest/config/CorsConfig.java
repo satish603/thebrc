@@ -13,9 +13,13 @@ public class CorsConfig implements WebMvcConfigurer {
     @Value("${cors.allowed.origins}")
     private String[] allowedOrigins;
 
+    @Value("${cors.exposed.headers}")
+    private String[] exposedHeaders;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
+                .exposedHeaders(exposedHeaders)
                 .allowedOrigins(allowedOrigins)
                 .allowedMethods("*")
                 .allowedHeaders("*")

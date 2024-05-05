@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import { BrcHubApi } from "../../api/brcHubApi";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,39 +19,22 @@ const Login = () => {
     }));
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
 
-  //   // Simulate login process (replace with actual login logic)
-  //   setTimeout(() => {
-  //     console.log("Logging in with:", formData);
-  //     setIsLoading(false);
-  //   }, 1000);
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //API calls
-    const url="http://localhost:8087";
-    const response = await fetch(`${url}/signin`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "accept": "application/json"
-        },
-        body: JSON.stringify({ email: formData.email, password: formData.password })
+    setIsLoading(true);
+
+    await BrcHubApi.signIn(formData, (response) => {
+
+      localStorage.setItem("token", response.headers.token);
+
+      console.log(response.data);
+
     });
-    const json = await response.json();
-    console.log(json)
-    if (json.success) {
-        localStorage.setItem("token", json.authtokenn);
-        navigate("/");
-        props.showAlert("Login Successful", "success");
-    }
-    else{
-        props.showAlert("Invalid Credentials", "danger");
-    }
-}
+
+    setIsLoading(false);
+
+  }
 
   return (
     <div className="h-full bg-primary/30">
@@ -115,18 +99,18 @@ const Login = () => {
             </motion.form>
 
             <motion.div className="flex items-center justify-center mt-4">
-  <span className="mr-2">Not Registered?</span>
-  <motion.a
-    className="text-accent underline"
-    onClick={(e) => {
-      e.preventDefault();
-      // Handle Click here link click action here
-      console.log("Click here clicked!");
-    }}
-  >
-    <Link href="/signup">Click here</Link> {/* Link to Signup page */}
-  </motion.a>
-</motion.div>
+              <span className="mr-2">Not Registered?</span>
+              <motion.a
+                className="text-accent underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Handle Click here link click action here
+                  console.log("Click here clicked!");
+                }}
+              >
+                <Link href="/signup">Click here</Link> {/* Link to Signup page */}
+              </motion.a>
+            </motion.div>
           </div>
         </div>
       </div>
