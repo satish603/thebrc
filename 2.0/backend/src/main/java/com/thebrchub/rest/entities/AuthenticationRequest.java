@@ -2,6 +2,10 @@ package com.thebrchub.rest.entities;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Component
 public class AuthenticationRequest {
 

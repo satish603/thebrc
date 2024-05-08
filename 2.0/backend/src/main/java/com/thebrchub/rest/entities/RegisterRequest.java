@@ -1,5 +1,9 @@
 package com.thebrchub.rest.entities;
 
+/**
+ * 
+ * @author shivanand
+ */
 public class RegisterRequest {
 
   private String name;

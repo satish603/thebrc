@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thebrchub.rest.entities.RegisterRequest;
 
+/**
+ * 
+ * @author shivanand
+ */
 @RestController
 public class DBoxController {
 

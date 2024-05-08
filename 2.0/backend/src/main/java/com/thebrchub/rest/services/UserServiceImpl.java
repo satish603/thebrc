@@ -20,6 +20,10 @@ import com.thebrchub.rest.repositories.UserRepo;
 import com.thebrchub.rest.token.Token;
 import com.thebrchub.rest.token.TokenType;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

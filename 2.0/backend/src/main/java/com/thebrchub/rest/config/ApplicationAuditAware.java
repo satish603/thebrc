@@ -9,6 +9,10 @@ import com.thebrchub.rest.entities.UserEntity;
 
 import java.util.Optional;
 
+/**
+ * 
+ * @author shivanand
+ */
 public class ApplicationAuditAware implements AuditorAware<Integer> {
 
     @Override

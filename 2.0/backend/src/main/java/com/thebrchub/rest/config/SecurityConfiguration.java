@@ -32,6 +32,10 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

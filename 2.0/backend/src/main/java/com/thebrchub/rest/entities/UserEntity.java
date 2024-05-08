@@ -16,6 +16,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Component
 @Document(collection = "users")
 public class UserEntity implements UserDetails {

@@ -18,6 +18,10 @@ import com.thebrchub.rest.entities.EmailEntity;
 
 import jakarta.mail.internet.MimeMessage;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Service
 public class EmailServiceImpl implements EmailService {
 

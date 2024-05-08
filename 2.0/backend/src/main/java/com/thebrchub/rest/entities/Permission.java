@@ -1,5 +1,9 @@
 package com.thebrchub.rest.entities;
 
+/**
+ * 
+ * @author shivanand
+ */
 public enum Permission {
 
     ADMIN_READ("admin:read"),

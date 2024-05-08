@@ -4,6 +4,10 @@ import com.thebrchub.rest.entities.AuthenticationRequest;
 import com.thebrchub.rest.entities.AuthenticationResponse;
 import com.thebrchub.rest.entities.RegisterRequest;
 
+/**
+ * 
+ * @author shivanand
+ */
 public interface UserService {
 
 	AuthenticationResponse createUser(RegisterRequest request) throws Exception;

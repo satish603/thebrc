@@ -3,6 +3,10 @@ package com.thebrchub.rest.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author shivanand
+ */
 public class AuthenticationResponse {
 
   @JsonProperty("access_token")

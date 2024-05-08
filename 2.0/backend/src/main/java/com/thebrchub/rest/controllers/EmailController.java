@@ -14,6 +14,10 @@ import com.thebrchub.rest.services.EmailService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * 
+ * @author shivanand
+ */
 @Tag(name = "Email Services", description = "APIs to invoke email services.")
 @RestController
 public class EmailController {

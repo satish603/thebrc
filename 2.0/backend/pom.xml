@@ -11,7 +11,7 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.thebrchub</groupId>
-	<artifactId>rest</artifactId>
+	<artifactId>thebrchub-backend</artifactId>
 	<version>1</version>
 	<name>The BRC Hub</name>
 	<description>The BRC Hub Rest Services</description>

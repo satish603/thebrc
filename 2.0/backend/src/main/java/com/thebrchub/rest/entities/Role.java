@@ -15,6 +15,10 @@ import static com.thebrchub.rest.entities.Permission.USER_UPDATE;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+/**
+ * 
+ * @author shivanand
+ */
 public enum Role {
 
         USER(
