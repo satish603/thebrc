@@ -1,33 +1,6 @@
 {
-  "name": "thebrcexplorers",
-  "version": "1.0.1",
+  "name": "codestation-portfolio",
   "private": true,
-  "author": {
-    "name": "THE BRC HUB",
-    "email": "thebrcexplorers@gmail.com",
-    "url": "https://github.com/thebrchub"
-  },
-  "description": "Ethan Smith is a Full-stack web developer with 10+ years of experience.",
-  "keywords": [
-    "react",
-    "next",
-    "nextjs",
-    "html",
-    "css",
-    "javascript",
-    "js",
-    "modern-ui",
-    "modern-ux",
-    "portfolio",
-    "framer-motion",
-    "3d-website",
-    "particle-effect"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thebrchub/modern-portfolio.git"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,24 +8,30 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^13.4.4",
-    "axios": "^1.6.8",
-    "framer-motion": "^10.12.16",
-    "next": "13.4.3",
-    "react": "18.2.0",
-    "react-countup": "^6.4.2",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
-    "react-tsparticles": "^2.9.3",
-    "swiper": "^9.4.0",
-    "tailwind-scrollbar": "^3.0.4",
-    "tsparticles": "^2.9.3"
+    "@emailjs/browser": "^3.4.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.6.0",
+    "@fontsource/inter": "^4.5.1",
+    "@iconify/react": "^3.1.2",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/lab": "^5.0.0-alpha.64",
+    "@mui/material": "^5.2.8",
+    "embla-carousel-react": "^6.0.2",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "next": "12.0.7",
+    "next-optimized-images": "^2.6.2",
+    "number-counter": "^1.0.3",
+    "react": "17.0.2",
+    "react-countup": "^6.2.0",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.24.1",
+    "react-scroll": "^1.8.4",
+    "react-visibility-sensor": "^5.1.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "eslint": "8.41.0",
-    "eslint-config-next": "13.4.3",
-    "postcss": "^8.4.23",
-    "tailwindcss": "^3.3.2"
+    "eslint": "8.6.0",
+    "eslint-config-next": "12.0.7"
   }
 }
