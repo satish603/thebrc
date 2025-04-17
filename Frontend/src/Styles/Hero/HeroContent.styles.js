@@ -25,7 +25,7 @@ const styles = {
   },
 
   Slogan: {
-    fontWeight: 500,
+    fontWeight: 600,
     // color: "text.secondary",
     color: "black",
     mb: 2,
@@ -50,7 +50,11 @@ const styles = {
     pl: {
       xs: 0,
       sm: 2,
-    }
+    },
+    textAlign: {
+      xs: "left",
+      md: "left",
+    },
   },
 
   Button: {

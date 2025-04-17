@@ -42,27 +42,46 @@ const styles = {
         
     },
     HeroImage: {
-        position: "absolute",
+        position: {
+          xs: "relative",
+          md: "absolute"
+        },
         right: {
-            lg: "1%",
-            xxs: "0%"
-            
+          lg: "1%",
+          xxs: "0%"
         },
-        bottom: "0",
+        bottom: {
+          xs: "unset",
+          md: "0"
+        },
         width: {
-            lg: "58%",
-            md: "70%",
-            smd: "65%",
-            xxs: "0%"
+          lg: "58%",
+          md: "70%",
+          smd: "65%",
+          xs: "100%", // ⬅️ Reduced from 100% to 80% for better fit
+          xxs: "85%" // ⬅️ Same idea here
         },
-        //height: "100%",
+        maxHeight: {
+          xs: "300px",  // ⬅️ Controls the height on small devices
+          md: "none"
+        },
+        objectFit: "contain", // ⬅️ Ensures the image scales nicely
         display: {
-            smd: "unset",
-            xxs: "none",
-
+          xs: "block",
+          xxs: "block"
+        },
+        mt: {
+          xs: 4,
+          md: 0
+        },
+        mx: {
+          xs: "auto",
+          md: "unset"
         },
         zIndex: 1,
-    },
+      },
+      
+      
     Paticle: {
         position: "absolute",
         left: "0",
