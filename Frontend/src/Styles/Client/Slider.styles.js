@@ -3,7 +3,7 @@ const styles = {
         overflow: "hidden",
         pl: {
             md: "3%",
-            sm: "2%",
+            sm: "3%",
             xxs: "2%"
         },
         pr: {
@@ -29,7 +29,7 @@ const styles = {
             smd: "0 0 70%",
             lsm: "0 0 80%",
             msm: "0 0 90%",
-            xs: "0 0 90%",
+            xs: "0 0 98%",
             xxs: "0 0 100%"
         },
         backgroundColor: "background.default",

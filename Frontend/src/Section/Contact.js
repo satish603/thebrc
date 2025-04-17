@@ -29,7 +29,7 @@ const Contact = () => {
                 spacing={2}
                 alignItems="center"
                 justifyContent="center"
-                sx={{ display: { xs: "none", md: "flex" }, mt: 4 }}
+                sx={{ display: { xs: "100%", md: "flex" }, mt: 5 }}
             >
                 <Grid item md={4}>
                     <Typography
@@ -43,7 +43,7 @@ const Contact = () => {
                             fontWeight: 800,
                             pl:- 1,
                             // md: "1.2rem",
-                            // fontSize: { xs: "1rem", md: "1.2rem" },
+                            // fontSize: { xs: "1.4rem", md: "1.2rem" },
     textAlign: { xs: "center", md: "right" },
     pr: { md: 2 },
     whiteSpace: { xs: "normal", md: "nowrap" },
@@ -82,7 +82,16 @@ const Contact = () => {
                             fontWeight: 800,
                             textAlign: "left",
                             color:"white",
-                            pl: 1
+                            pl: 1,
+                            mb: {
+                                lg: 10,
+                                xs: 1,
+                                sm: -7,},
+                                textAlign: {
+                                    xs: "center",
+                               
+                                  },
+                            mt: {xs:7}
                         }}
                     >
                         Join the movement — plant a tree, fuel a better future.

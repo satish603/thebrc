@@ -1,6 +1,6 @@
 import { Box, Stack, ButtonBase, Typography } from "@mui/material";
 import { Link } from "react-scroll";
-
+import { motion } from "framer-motion";
 //Icons
 import DoneIcon from '@mui/icons-material/Done';
 import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
@@ -54,7 +54,16 @@ const Myself = () => {
                     </ButtonBase>
                 </Link>
             </Box>
-            <Box component="img" src={AboutImage} alt="About" sx={styles.Image} />
+            {/* <Box component="img" src={AboutImage} alt="About" sx={styles.Image} /> */}
+            <Box
+                component={motion.img}
+                src={AboutImage}
+                alt="About"
+                sx={styles.Image}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5 }}
+            />
         </Box>
     );
 };
