@@ -7,7 +7,7 @@ import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon } 
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 //Logo
-import Logo from "Assets/header/logo.png";
+import Logo from "Assets/header/logoBlack.png";
 
 //Styles
 import styles from "Styles/Footer/FooterOne.styles";

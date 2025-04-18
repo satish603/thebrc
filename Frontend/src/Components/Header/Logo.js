@@ -8,19 +8,48 @@ import LogoBlack from "Assets/header/logoBlack.png";
 
 const Logo = ({ isSticky }) => {
     return (
-        <Box sx={{ mt: "5px", a: { cursor: "pointer" } }}>
-            <Link
-                to="home"
-                spy={true}
-                smooth={true}
-                duration={500}
-            >
-                <Image
-                    src={isSticky ? LogoBlack : LogoWhite}
-                    width={600}
-                    height={100}
-                    alt="Logo"
-                />
+        <Box
+            sx={{
+                mt: "3px",
+                width: "450px",
+                height: "90px", // control logo size
+                position: "relative",
+                ml:"22px",
+                a: { cursor: "pointer" }
+            }}
+        >
+            <Link to="home" spy={true} smooth={true} duration={400}>
+                <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
+                    {/* White Logo */}
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            opacity: isSticky ? 0 : 1,
+                            transition: "opacity 0.5s ease-in-out"
+                        }}
+                    >
+                        <Image src={LogoWhite} alt="Logo White" layout="fill" objectFit="contain" />
+                    </Box>
+
+                    {/* Black Logo */}
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            opacity: isSticky ? 1 : 0,
+                            transition: "opacity 0.5s ease-in-out"
+                        }}
+                    >
+                        <Image src={LogoBlack} alt="Logo Black" layout="fill" objectFit="contain" />
+                    </Box>
+                </Box>
             </Link>
         </Box>
     );

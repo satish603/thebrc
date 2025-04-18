@@ -9,7 +9,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon } from "Utilis/Icons";
 
 //Logo
-import Logo from "Assets/header/logo.png";
+import Logo from "Assets/header/logoBlack.png";
 
 //Data
 import Navs from "Data/Header/Navs.data";

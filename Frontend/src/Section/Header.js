@@ -21,7 +21,8 @@ const Header = () => {
             <Container maxWidth={false} disableGutters>
                 <Grid container spacing={2} sx={{ alignItems: "center" }}>
                     <Grid item md={3} xxs={6} >
-                        <Logo />
+                        <Logo isSticky={scroll} />
+
                     </Grid>
                     <Grid item md={6} xxs={0} sx={{ display: { md: "block", xxs: "none" } }}>
                         <Nav />
