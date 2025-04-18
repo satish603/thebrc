@@ -1,13 +1,14 @@
 const styles = {
     Container: {
 
-            minHeight: "100vh",
+            minHeight: {xl:"100vh",xs:"100h"},
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             flexDirection: {
               xs: "column", // Stack on small screens
-              md: "row"     // Side-by-side on medium and up
+              md: "row",     // Side-by-side on medium and up
+              sm: "column"
             },
             px: { xs: 2, sm: 7, md: 10 },
             position: "relative",
@@ -27,7 +28,7 @@ const styles = {
         },
         pt: {
             xxl: "18em",  // was 25em
-            xl: "5em",   // was 20em
+            xl: "5rem",   // was 20em
             lg: "12em",   // was 15em
             md: "10em",   // was 10em (keep same)
             smd: "10em",
@@ -44,7 +45,7 @@ const styles = {
     HeroImage: {
         position: {
           xs: "relative",
-          md: "absolute"
+          md: "absolute",
         },
         right: {
           lg: "1%",
@@ -52,27 +53,30 @@ const styles = {
         },
         bottom: {
           xs: "unset",
-          md: "0"
+          md: "0",
         },
         width: {
           lg: "58%",
           md: "70%",
           smd: "65%",
+          sm: "100%",
           xs: "100%", // ⬅️ Reduced from 100% to 80% for better fit
           xxs: "85%" // ⬅️ Same idea here
         },
         maxHeight: {
           xs: "300px",  // ⬅️ Controls the height on small devices
-          md: "none"
+          md: "none",
+         
         },
         objectFit: "contain", // ⬅️ Ensures the image scales nicely
         display: {
           xs: "block",
-          xxs: "block"
+          xxs: "block",
+          
         },
         mt: {
           xs: 4,
-          md: 0
+          md: 0,
         },
         mx: {
           xs: "auto",

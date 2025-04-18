@@ -15,12 +15,12 @@ const styles = {
   Title: {
     fontWeight: 800,
     fontSize: {
-      xs: "2rem",
-      sm: "2.5rem",
+      xs: "3rem",
+      sm: "3rem",
       md: "3rem",
       lg: "4rem",
     },
-    mb: 2,
+    mb: 3,
     color: "#162144"
   },
 
@@ -52,7 +52,7 @@ const styles = {
       sm: 2,
     },
     textAlign: {
-      xs: "left",
+      xs: "center",
       md: "left",
     },
   },

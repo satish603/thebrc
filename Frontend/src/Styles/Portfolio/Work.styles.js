@@ -67,13 +67,13 @@ const styles = {
                 transform: "scaleY(1)",
                 visibility: "visible",
             },
-            "& .css-mui-svg": {
-                visibility: "visible",
-                opacity: 1,
-                transform: "translate(-50%, -50%) scaleY(1)",
-                top: "50%",
-                zIndex: 9
-            }
+            // "& .css-mui-svg": {
+            //     visibility: "visible",
+            //     opacity: 1,
+            //     transform: "translate(-50%, -50%) scaleY(1)",
+            //     top: "50%",
+            //     zIndex: 9
+            // }
         }
     },
     WorkTitle: {

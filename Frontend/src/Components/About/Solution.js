@@ -1,5 +1,6 @@
 import { Box, Grid, Typography, Modal, Paper, List, ListItem, ListItemText } from "@mui/material";
 import { useState } from "react";
+import { useEffect } from "react"; // Make sure this is at the top!
 
 //Data
 import Solutions from "Data/About/Solution.data";
@@ -20,6 +21,16 @@ const Solution = () => {
         setOpen(false);
         setSelectedSolution(null);
     };
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflowY = 'scroll';
+        } else {
+            document.body.style.overflowY = 'auto';
+        }
+        return () => {
+            document.body.style.overflowY = 'auto';
+        };
+    }, [open])
 
     return (
         <Box sx={{ mt: "4em" }}>
@@ -54,6 +65,7 @@ const Solution = () => {
                     ))
                 }
             </Grid>
+            
 
             {/* Modal */}
             <Modal open={open} onClose={handleClose}>
@@ -64,7 +76,7 @@ const Solution = () => {
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                         p: 4,
-                        width: { xs: "90%", md: 500 },
+                        width: { xs: "90%",xxs: "90%", md: 500, },
                         bgcolor: "#fff",
                         borderRadius: "20px",
                         boxShadow: "0 0 30px rgba(121, 40, 202, 0.5)",
@@ -73,6 +85,7 @@ const Solution = () => {
                         animation: "fadeIn 0.3s ease-in-out"
                     }}
                 >
+                    
                     {selectedSolution && (
                         <>
                             <Typography

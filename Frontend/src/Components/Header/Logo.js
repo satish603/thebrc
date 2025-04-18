@@ -11,10 +11,10 @@ const Logo = ({ isSticky }) => {
         <Box
             sx={{
                 mt: "3px",
-                width: "450px",
-                height: "90px", // control logo size
+                width: "350px",
+                height: "70px", // control logo size
                 position: "relative",
-                ml:"22px",
+                ml:{xxl:"-100px",lg:"-100px",xxs:"-120px", sm:"-100px"},
                 a: { cursor: "pointer" }
             }}
         >
