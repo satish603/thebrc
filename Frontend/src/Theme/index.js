@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 // Create a theme instance.
 const theme = createTheme({
     typography: {
-        fontFamily: "Inter"
+        fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif'
         // 400 Regular
         // 500 Medium
         // 600 Semi-Bold
@@ -75,11 +75,12 @@ const theme = createTheme({
         },
         MuiButtonBase: {
             styleOverrides: {
-                root: {
-                    fontFamily: "Inter"
-                },
-            },
-        },
+              root: {
+                fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif'
+              }
+            }
+          }
+          
     }
 });
 

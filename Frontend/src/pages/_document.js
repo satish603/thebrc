@@ -8,6 +8,7 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
+                    <meta name="emotion-insertion-point" content="" /> {/* ✅ FIX HERE */}
                     <link rel="shortcut icon" href="/static/favicon.ico" />
                     {this.props.emotionStyleTags}
                 </Head>
@@ -19,10 +20,12 @@ export default class MyDocument extends Document {
         );
     }
 }
+
 MyDocument.getInitialProps = async (ctx) => {
     const originalRenderPage = ctx.renderPage;
     const cache = createEmotionCache();
     const { extractCriticalToChunks } = createEmotionServer(cache);
+
     ctx.renderPage = () =>
         originalRenderPage({
             enhanceApp: (App) =>
@@ -30,6 +33,7 @@ MyDocument.getInitialProps = async (ctx) => {
                     return <App emotionCache={cache} {...props} />;
                 },
         });
+
     const initialProps = await Document.getInitialProps(ctx);
     const emotionStyles = extractCriticalToChunks(initialProps.html);
     const emotionStyleTags = emotionStyles.styles.map((style) => (
@@ -39,6 +43,7 @@ MyDocument.getInitialProps = async (ctx) => {
             dangerouslySetInnerHTML={{ __html: style.css }}
         />
     ));
+
     return {
         ...initialProps,
         emotionStyleTags,

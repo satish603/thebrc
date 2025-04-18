@@ -2,10 +2,11 @@ import { Box } from "@mui/material";
 import Image from "next/image";
 import { Link } from "react-scroll";
 
-//Logos
-import Logos from "Assets/header/logo.png";
+// Logos
+import LogoWhite from "Assets/header/logoWhite.png";
+import LogoBlack from "Assets/header/logoBlack.png";
 
-const Logo = () => {
+const Logo = ({ isSticky }) => {
     return (
         <Box sx={{ mt: "5px", a: { cursor: "pointer" } }}>
             <Link
@@ -14,9 +15,15 @@ const Logo = () => {
                 smooth={true}
                 duration={500}
             >
-                <Image src={Logos} width={600} height={100} alt="Logo" />
+                <Image
+                    src={isSticky ? LogoBlack : LogoWhite}
+                    width={600}
+                    height={100}
+                    alt="Logo"
+                />
             </Link>
         </Box>
     );
 };
+
 export default Logo;
