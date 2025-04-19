@@ -252,6 +252,10 @@ const Solution = () => {
                             sx={{
                                 mt: 1,
                                 textAlign: "center",
+                                width: "fit-content", 
+                                maxWidth: "300px",     
+                                paddingInline: "24px",    // Horizontal padding
+                                marginInline: "auto",     // Center horizontally
                                 background: "linear-gradient(135deg, #7b2cbf, #4c1d95)",
                                 color: "white",
                                 py: 1,

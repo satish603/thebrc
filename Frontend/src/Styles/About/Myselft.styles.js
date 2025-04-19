@@ -78,7 +78,7 @@ const styles = {
     Image: {
         position: "absolute",
         right: {
-            lg: "0%",
+            lg: "-4%",
             xxs: "0%",
 
         },
