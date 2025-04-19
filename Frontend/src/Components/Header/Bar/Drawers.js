@@ -6,7 +6,8 @@ import { Link as Scroll } from "react-scroll";
 //Icons
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon } from "Utilis/Icons";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon, YoutubeIcon } from "Utilis/Icons";
 
 //Logo
 import Logo from "Assets/header/logoBlack.png";
@@ -89,31 +90,38 @@ const Drawers = ({ toggleDrawer }) => {
                 </Box>
             </Stack>
             <Stack direction="row" sx={styles.Social}>
-                <Link href="https://github.com/codestation21">
+                <Link href="https://instagram.com/thebrchub">
+                                    <a target="_blank">
+                                        <ButtonBase>
+                                            <InstagramIcon />
+                                        </ButtonBase>
+                                    </a>
+                                </Link>
+                {/* <Link href="https://github.com/codestation21">
                     <a target="_blank">
                         <ButtonBase>
                             <GitHubIcon />
                         </ButtonBase>
                     </a>
-                </Link>
-                <Link href="https://www.facebook.com/codestation21">
+                </Link> */}
+                <Link href="https://www.facebook.com/thebrchub">
                     <a target="_blank">
                         <ButtonBase>
                             <FacebookIcon />
                         </ButtonBase>
                     </a>
                 </Link>
-                <Link href="https://twitter.com/codestation21">
+                <Link href="https://twitter.com/thebrchub">
                     <a target="_blank">
                         <ButtonBase>
                             <TwitterIcon />
                         </ButtonBase>
                     </a>
                 </Link>
-                <Link href="https://behance.com/codestation21">
+                <Link href="https://www.youtube.com/@TheBRCHub">
                     <a target="_blank">
                         <ButtonBase>
-                            <BehaceIcon />
+                            <YoutubeIcon />
                         </ButtonBase>
                     </a>
                 </Link>

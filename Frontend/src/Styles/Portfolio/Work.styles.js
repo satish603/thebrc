@@ -63,10 +63,10 @@ const styles = {
             img: {
                 transform: "scale3d(1.1, 1.1, 1.1)"
             },
-            "&:before": {
-                transform: "scaleY(1)",
-                visibility: "visible",
-            },
+            // "&:before": {
+            //     transform: "scaleY(1)",
+            //     visibility: "visible",
+            // },
             // "& .css-mui-svg": {
             //     visibility: "visible",
             //     opacity: 1,

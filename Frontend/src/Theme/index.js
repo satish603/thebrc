@@ -20,7 +20,7 @@ const theme = createTheme({
             default: "#FFFFFF" // Default Background Color
         },
         primary: {
-            main: "rgba(249, 54, 0, 0.94)", // Document Main Primary Color
+            main: "rgba(94, 12, 166, 0.65)", // Document Main Primary Color
             light: "#CECECE", // Document Light Color (Button Background)
             box_shadow_black: " #0000001c", // Box Shadow Black (Header Sticky)
             success: "#4CAF50", // SuccessMessage Color

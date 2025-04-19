@@ -1,5 +1,7 @@
 //Images
+import Work_2 from "Assets/portfolio/legalvala.png";
 import Work from "Assets/portfolio/work.png";
+import Work_3 from "Assets/portfolio/startfinity.png";
 
 export default [
     {
@@ -23,13 +25,13 @@ export default [
     {
         name: "Web Development",
         filter: "web",
-        image: Work,
+        image: Work_2,
         url: "https://legalvala.com/"
     },
     {
         name: "Web Development",
         filter: "web",
-        image: Work,
+        image: Work_3,
         url: "https://startfinitynav.com/"
     },
     {

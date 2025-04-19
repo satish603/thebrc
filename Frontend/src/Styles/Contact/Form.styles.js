@@ -23,9 +23,9 @@ const styles = {
         }
     },
     SubmitButton: {
-        backgroundColor: "rgb(94, 12, 166)",
+        backgroundColor: "black",
         height: "52px",
-        fontSize: "14px",
+        fontSize: "1rem",
         fontWeight: 600,
         color: "background.default",
         borderRadius: "5px",
@@ -38,12 +38,18 @@ const styles = {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          backgroundColor: "#162144", // dark purple shade
+          color: "white", // text color on hover
+        },
     
         ">svg": {
             fontSize: "18px",
             mb: "-3px",
             ml: "10px"
         }
+        
     },
     
     ErrorMessage: {

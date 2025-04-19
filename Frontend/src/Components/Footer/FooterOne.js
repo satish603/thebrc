@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 //Icons
-import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon } from "Utilis/Icons";
+import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon , YoutubeIcon} from "Utilis/Icons";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import InstagramIcon from '@mui/icons-material/Instagram';
+
 
 //Logo
 import Logo from "Assets/header/logoBlack.png";
@@ -62,13 +64,20 @@ const FooterOne = () => {
                 </Box>
             </Stack>
             <Stack direction="row" sx={styles.Social}>
-                <Link href="https://github.com/thebrchub">
+                <Link href="https://instagram.com/thebrchub">
+                    <a target="_blank">
+                        <ButtonBase>
+                            <InstagramIcon />
+                        </ButtonBase>
+                    </a>
+                </Link>
+                {/* <Link href="https://github.com/thebrchub">
                     <a target="_blank">
                         <ButtonBase>
                             <GitHubIcon />
                         </ButtonBase>
-                    </a>
-                </Link>
+                    </a> */}
+                {/* </Link> */}
                 <Link href="https://www.facebook.com/thebrchub">
                     <a target="_blank">
                         <ButtonBase>
@@ -83,10 +92,10 @@ const FooterOne = () => {
                         </ButtonBase>
                     </a>
                 </Link>
-                <Link href="https://behance.com/thebrchub">
+                <Link href="https://youtube.com/@TheBRCHub">
                     <a target="_blank">
                         <ButtonBase>
-                            <BehaceIcon />
+                            <YoutubeIcon />
                         </ButtonBase>
                     </a>
                 </Link>
