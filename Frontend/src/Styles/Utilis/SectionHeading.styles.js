@@ -8,7 +8,7 @@ const styles = {
         letterSpacing: "1px",
         fontSize: {
             xxs: "1rem",   // Very small devices (custom, if your theme supports it)
-            xs:  "1.5rem",     // Phones
+            xs:  "1.6rem",     // Phones
             sm:  "2.5rem",   // Tablets
             md:  "2rem",     // Small laptops
             lg:  "2.3rem",   // Desktops

@@ -35,7 +35,7 @@ const styles = {
             lsm: "10em",
             msm: "9em",
             sm: "9em",
-            xs: "9em",
+            xs: "7em",
             xxs: "9em"
         },
         position: "relative",

@@ -5,7 +5,7 @@ const styles = {
       xs: "100%",
       md: "50%",
     },
-    px: { xs: 2, sm: 4 },
+    px: { xs: 1, sm: 4 },
     textAlign: {
       xs: "center",
       md: "left",
