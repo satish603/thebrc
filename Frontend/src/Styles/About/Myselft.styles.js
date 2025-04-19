@@ -12,6 +12,7 @@ const styles = {
         fontWeight: 700,
         color: "#162144", 
         mb: "25px",
+        pl: "15px",
         fontSize: {
             lg: "2.125rem",
             md: "2rem",

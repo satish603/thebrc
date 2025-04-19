@@ -1,6 +1,5 @@
 const styles = {
     Container: {
-
             minHeight: {xl:"100vh",xs:"100h"},
             display: "flex",
             alignItems: "center",
@@ -10,6 +9,7 @@ const styles = {
               md: "row",     // Side-by-side on medium and up
               sm: "column"
             },
+            maxWidth: "100%",        // ✅ Prevents image from exceeding container
             px: { xs: 2, sm: 7, md: 10 },
             position: "relative",
             background: theme => theme.palette.primary.HeroGradient,

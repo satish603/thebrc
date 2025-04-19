@@ -7,9 +7,9 @@ const styles = {
         textAlign: "center", 
         letterSpacing: "1px",
         fontSize: {
-            xxs: "0.9rem",   // Very small devices (custom, if your theme supports it)
-            xs:  "1rem",     // Phones
-            sm:  "1.9rem",   // Tablets
+            xxs: "1rem",   // Very small devices (custom, if your theme supports it)
+            xs:  "1.5rem",     // Phones
+            sm:  "2.5rem",   // Tablets
             md:  "2rem",     // Small laptops
             lg:  "2.3rem",   // Desktops
             xl:  "2.7rem",   // Large screens

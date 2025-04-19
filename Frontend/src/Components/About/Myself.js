@@ -54,7 +54,7 @@ const Myself = () => {
                     </ButtonBase>
                 </Link>
             </Box>
-            {/* <Box component="img" src={AboutImage} alt="About" sx={styles.Image} /> */}
+            <Box component="img" src={AboutImage} alt="About" sx={styles.Image} />
             <Box
                 component={motion.img}
                 src={AboutImage}

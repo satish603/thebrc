@@ -15,7 +15,7 @@ const Client = () => {
         <Box component="section" sx={styles.Container} id="client">
             <SectionHeading
                 value1="Feedback that Fuels Us !"
-                value2="Beyond Delivery. We Leave an Impact."
+                // value2="Beyond Delivery. We Leave an Impact."
                 border={true}
             />
             <Slider />

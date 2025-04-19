@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
+
 // Create a theme instance.
 const theme = createTheme({
     typography: {
@@ -81,7 +82,26 @@ const theme = createTheme({
             }
           }
           
-    }
+    },
+MuiCssBaseline: {
+          styleOverrides: {
+            html: {
+              overflowX: 'auto',
+            },
+            body: {
+              overflowX: 'auto',
+            },
+            '*': {
+              outline: '1px solid rgba(0,255,0,0.2)',
+            },
+            '*:hover': {
+              outline: '1px solid red',
+            },
+          },
+        },
+    
+      
+      
 });
 
 export default theme;

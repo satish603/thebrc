@@ -15,7 +15,7 @@ const styles = {
   Title: {
     fontWeight: 800,
     fontSize: {
-      xs: "3rem",
+      xs: "2rem",
       sm: "3rem",
       md: "3rem",
       lg: "4rem",
