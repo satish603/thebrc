@@ -20,16 +20,16 @@ import { useEffect } from 'react'; // 🟣 Add this
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  // 🛠️ Debug code to find overflowing elements
-  useEffect(() => {
-    const all = document.querySelectorAll('*');
-    all.forEach((el) => {
-      if (el.scrollWidth > window.innerWidth) {
-        el.style.outline = '2px solid red'; // 🔴 Visually highlight
-        console.warn('🚨 Overflowing element found:', el);
-      }
-    });
-  }, []);
+  // // 🛠️ Debug code to find overflowing elements
+  // useEffect(() => {
+  //   const all = document.querySelectorAll('*');
+  //   all.forEach((el) => {
+  //     if (el.scrollWidth > window.innerWidth) {
+  //       el.style.outline = '2px solid red'; // 🔴 Visually highlight
+  //       console.warn('🚨 Overflowing element found:', el);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <CacheProvider value={emotionCache}>
