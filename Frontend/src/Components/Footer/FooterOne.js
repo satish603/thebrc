@@ -50,10 +50,10 @@ const FooterOne = () => {
                 </Box>
             </Stack>
             <Stack direction="row" sx={styles.Address}>
-                <Box>
+                {/* <Box>
                     <PhoneIcon />
-                </Box>
-                <Box>
+                </Box> */}
+                {/* <Box>
                     <Link href="tel:+91 xxxx xxxxxx">
                         <a>
                             <Typography variant="body1" component="p">
@@ -61,7 +61,7 @@ const FooterOne = () => {
                             </Typography>
                         </a>
                     </Link>
-                </Box>
+                </Box> */}
             </Stack>
             <Stack direction="row" sx={styles.Social}>
                 <Link href="https://instagram.com/thebrchub">

@@ -1,44 +1,56 @@
-import { useState } from 'react';
-import { Box, Typography, InputBase, ButtonBase, CircularProgress } from "@mui/material";
-import { useForm } from 'react-hook-form';
-import emailjs from '@emailjs/browser';
-
-//Icon
-import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
-import ErrorIcon from '@mui/icons-material/Error';
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
+import { Box, Typography, Avatar, Stack } from "@mui/material";
 
 //Styles
 import styles from "Styles/Footer/FooterThree.styles"
 
 const FooterThree = () => {
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-    const [success, setSuccess] = useState(false);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset
-    } = useForm();
-    const onSubmit = (data, e) => {
-        setLoading(true);
-        emailjs.sendForm('service_p6xyx8c', 'template_50go8lq', e.target, 'user_a3mibtvU72r4yERjbA9dj')
-            .then((result) => {
-                setLoading(false);
-                setSuccess(true);
-                setMessage('Email received! We will contact you soon.');
-                reset();
-            }, (error) => {
-                setLoading(false);
-                setSuccess(false);
-                setMessage('Something went wrong. Try again!');
-            });
-    }
     return (
         <Box>
-            {/* <Typography variant="h6" component="h6" sx={styles.Title}>
+            {/* --- Founders' Note Section --- */}
+            <Box>
+  <Typography
+    variant="h6"
+    component="h6"
+    sx={{
+      fontFamily: `'Orbitron', sans-serif`,
+      fontSize: '1.3rem',
+      fontWeight: 600,
+      letterSpacing: '1px',
+      background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      mb: 1.5,
+      mt: {lg: 5.5, xs: 0},
+      textAlign:  'center',
+    }}
+  >
+    Code like artists. Design like engineers.
+  </Typography>
+  <Typography
+    variant="body2"
+    component="p"
+    sx={{
+      fontStyle: 'italic',
+      fontWeight: 700,
+      color: '#555',
+      textAlign: 'center',
+    }}
+  >
+    That’s how we roll at BRC Hub 🚀
+  </Typography>
+</Box>
+
+
+            {/* Mini Avatars (optional for personality & aesthetic) */}
+            {/* <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                <Avatar alt="Founder 1" src="/images/founder1.jpg" />
+                <Avatar alt="Founder 2" src="/images/founder2.jpg" />
+                <Avatar alt="Founder 3" src="/images/founder3.jpg" />
+            </Stack> */}
+
+            {/* --- Old Newsletter Section (Preserved as-is for future) --- */}
+            {/*
+            <Typography variant="h6" component="h6" sx={styles.Title}>
                 Newsletters
             </Typography>
             <Typography variant="body1" component="p" sx={styles.Description}>
@@ -51,10 +63,10 @@ const FooterThree = () => {
                     {...register(
                         'email',
                         {
-                            required: 'Please enter an email addreess!',
+                            required: 'Please enter an email address!',
                             pattern: {
                                 value: /\S+@\S+\.\S+/,
-                                message: 'The email you enter is invalid email!',
+                                message: 'The email you entered is invalid!',
                             },
                         },
                         { required: true }
@@ -98,8 +110,10 @@ const FooterThree = () => {
                         </>
                     }
                 </ButtonBase>
-            </Box> */}
+            </Box>
+            */}
         </Box>
     );
 };
+
 export default FooterThree;

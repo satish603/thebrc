@@ -12,6 +12,9 @@ import {
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 //Data
 import Solutions from "Data/About/Solution.data";
@@ -56,35 +59,71 @@ const Solution = () => {
     return (
         <Box sx={{ mt: "4em" }}>
             <Grid container spacing={2}>
-                {Solutions &&
-                    Solutions.map((solution, i) => (
-                        <Grid item md={3} sm={6} xxs={12} key={i}>
-                            <Box
-                                sx={{
-                                    textAlign: "center",
-                                    cursor: "pointer",
-                                    transition: "0.3s ease",
-                                    p: 2,
-                                    borderRadius: "20px",
-                                    "&:hover": {
-                                        boxShadow: "0 0 20px rgba(121, 40, 202, 0.4)",
-                                        transform: "scale(1.03)",
-                                        background: "rgba(255, 255, 255, 0.05)",
-                                    },
-                                }}
-                                onClick={() => handleOpen(solution)}
-                            >
-                                <Box sx={styles.Image} component="img" src={solution.icon} />
-                                <Typography variant="h6" sx={styles.Title}>
-                                    {solution.title}
-                                </Typography>
-                                <Typography variant="body1" sx={styles.Description}>
-                                    {solution.description}
-                                </Typography>
-                            </Box>
-                        </Grid>
-                    ))}
-            </Grid>
+    {Solutions &&
+        Solutions.map((solution, i) => {
+            const controls = useAnimation();
+            const [ref, inView] = useInView({
+                threshold: 0.2,
+                triggerOnce: false,
+            });
+
+            useEffect(() => {
+                if (inView) {
+                    controls.start("visible");
+                } else {
+                    controls.start("hidden");
+                }
+            }, [controls, inView]);
+
+            const cardVariants = {
+                hidden: { opacity: 0, y: 40 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                        duration: 0.6,
+                        ease: "easeOut",
+                        delay: i * 0.1, // staggered delay
+                    },
+                },
+            };
+
+            return (
+                <Grid item md={3} sm={6} xxs={12} key={i}>
+                    <motion.div
+                        ref={ref}
+                        initial="hidden"
+                        animate={controls}
+                        variants={cardVariants}
+                    >
+                        <Box
+                            sx={{
+                                textAlign: "center",
+                                cursor: "pointer",
+                                transition: "0.3s ease",
+                                p: 2,
+                                borderRadius: "20px",
+                                "&:hover": {
+                                    boxShadow: "0 0 20px rgba(121, 40, 202, 0.4)",
+                                    transform: "scale(1.03)",
+                                    background: "rgba(255, 255, 255, 0.05)",
+                                },
+                            }}
+                            onClick={() => handleOpen(solution)}
+                        >
+                            <Box sx={styles.Image} component="img" src={solution.icon} />
+                            <Typography variant="h6" sx={styles.Title}>
+                                {solution.title}
+                            </Typography>
+                            <Typography variant="body1" sx={styles.Description}>
+                                {solution.description}
+                            </Typography>
+                        </Box>
+                    </motion.div>
+                </Grid>
+            );
+        })}
+</Grid>
 
             {/* Main Modal */}
             <Modal open={open} onClose={handleClose}>

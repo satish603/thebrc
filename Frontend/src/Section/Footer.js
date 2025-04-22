@@ -17,7 +17,7 @@ const Footer = () => {
                 <Grid item md={3} sm={6} xxs={12}>
                     <FooterTwo />
                 </Grid>    
-                <Grid item md={4} sm={6}>
+                <Grid item md={3} sm={6}>
                     <FooterOne />   
                 
                 </Grid>

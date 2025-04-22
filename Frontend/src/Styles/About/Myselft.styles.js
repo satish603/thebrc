@@ -1,3 +1,4 @@
+
 const styles = {
     Container: {
         mt: {
@@ -80,6 +81,7 @@ const styles = {
         right: {
             lg: "-4%",
             xxs: "0%",
+            md: "-5%"
 
         },
         bottom: "0",

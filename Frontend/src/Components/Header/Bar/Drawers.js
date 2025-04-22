@@ -76,7 +76,7 @@ const Drawers = ({ toggleDrawer }) => {
                 </Box>
             </Stack>
             <Stack direction="row" sx={styles.Address}>
-                <Box>
+                {/* <Box>
                     <PhoneIcon />
                 </Box>
                 <Box>
@@ -87,7 +87,7 @@ const Drawers = ({ toggleDrawer }) => {
                             </Typography>
                         </a>
                     </Link>
-                </Box>
+                </Box> */}
             </Stack>
             <Stack direction="row" sx={styles.Social}>
                 <Link href="https://instagram.com/thebrchub">

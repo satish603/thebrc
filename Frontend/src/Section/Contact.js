@@ -66,7 +66,7 @@ const Contact = () => {
                             width: "auto",
                             zIndex: 2,
                             marginTop: "-48px",  // Pulls it up close to the form
-                            marginBottom: {lg: "-78px", xs:-11.8, sm:-11.2, xl:-9.8, md: -11.8, smd: -11.8, lsm: -11.8,msm: -11.8, },// Optional: if you want it tight with next section
+                            marginBottom: {lg: "-78px", xs:-11.8, sm:-11.2, xl:-9.8, md: -9.8, smd: -11.8, lsm: -11.8,msm: -11.8, },// Optional: if you want it tight with next section
                             mx: "auto",          // Center horizontally
                             zIndex: 1,
                             position: "relative",

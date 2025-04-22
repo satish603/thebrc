@@ -7,7 +7,7 @@ const styles = {
             flexDirection: {
               xs: "column", // Stack on small screens
               md: "row",     // Side-by-side on medium and up
-              sm: "column"
+              // sm: "column"
             },
             maxWidth: "100%",        // ✅ Prevents image from exceeding container
             px: { xs: 2, sm: 7, md: 10 },
@@ -17,7 +17,7 @@ const styles = {
         pt: {
             xxl: "25em",
             xl: "20em",
-            lg: "15em",
+            lg: "20em",
             md: "10em",
             smd: "12em",
             lsm: "10em",
@@ -29,7 +29,7 @@ const styles = {
         pt: {
             xxl: "18em",  // was 25em
             xl: "5rem",   // was 20em
-            lg: "12em",   // was 15em
+            lg: "9em",   // was 15em
             md: "10em",   // was 10em (keep same)
             smd: "10em",
             lsm: "10em",
@@ -49,7 +49,8 @@ const styles = {
         },
         right: {
           lg: "1%",
-          xxs: "0%"
+          xxs: "0%",
+          md: "-10%"
         },
         bottom: {
           xs: "unset",
@@ -57,7 +58,7 @@ const styles = {
         },
         width: {
           lg: "58%",
-          md: "70%",
+          md: "67%",
           smd: "65%",
           sm: "100%",
           xs: "100%", // ⬅️ Reduced from 100% to 80% for better fit
@@ -66,6 +67,7 @@ const styles = {
         maxHeight: {
           xs: "300px",  // ⬅️ Controls the height on small devices
           md: "none",
+          
          
         },
         objectFit: "contain", // ⬅️ Ensures the image scales nicely
@@ -77,6 +79,7 @@ const styles = {
         mt: {
           xs: 4,
           md: 0,
+          
         },
         mx: {
           xs: "auto",

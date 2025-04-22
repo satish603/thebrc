@@ -1,6 +1,18 @@
 const styles = {
   Container: {
     zIndex: 2,
+    mb: {
+      xxl: 0,  // was 25em
+      xl: 0,   // was 20em
+      lg: 3,   // was 15em
+      md: 3,   // was 10em (keep same)
+      smd: 0,
+      lsm: 0,
+      msm: 0,
+      sm: 0,
+      xs: 0,
+      xxs: 0
+    },
     maxWidth: {
       xs: "100%",
       md: "50%",
@@ -17,7 +29,7 @@ const styles = {
     fontSize: {
       xs: "2rem",
       sm: "3rem",
-      md: "3rem",
+      md: "2.8rem",
       lg: "4rem",
     },
     mb: 3,
@@ -35,6 +47,7 @@ const styles = {
     fontSize: {
       xs: "1rem",
       sm: "1.1rem",
+      md: "1.5", 
     },
     color: "text.primary",
     maxWidth: "600px",

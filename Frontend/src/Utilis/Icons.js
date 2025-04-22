@@ -8,13 +8,13 @@ export const ClendarIcon = () => (
 
 export const MapIcon = () => (
     <SvgIcon>
-        <path d="M15.321 22.28l-3.185-9.514H1.772L21.698 1.579zm0 0" transform="matrix(1.09524 0 0 1.0909 -1.12 -.907)" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" stroke="#ff4f3e" strokeOpacity="1" strokeMiterlimit="4" />
+        <path d="M15.321 22.28l-3.185-9.514H1.772L21.698 1.579zm0 0" transform="matrix(1.09524 0 0 1.0909 -1.12 -.907)" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" stroke="rgba(64, 10, 111, 0.86)" strokeOpacity="1" strokeMiterlimit="4" />
     </SvgIcon>
 )
 
 export const EmailIcon = () => (
     <SvgIcon>
-        <path d="M14.582 9.723H6.48v1.62h8.102zM9.722 6.48H6.48v1.622h3.243zm9.72-.699V3.242h-3.563L11.344 0 6.8 3.242H3.238v2.543L0 8.102V24.3h22.684V8.1L19.44 5.786zM4.858 4.86h12.965v6.204l-6.48 5.343-6.485-5.347zm-3.238 6.485L8 16.19l-6.379 4.872zm1.617 11.34l6.434-5.223 1.668 1.273 1.668-1.27 6.433 5.22zm17.825-1.622l-6.387-4.859 6.386-4.86v9.723zm0 0" stroke="none" fillRule="nonzero" fill="#ff4f3e" fillOpacity="1" />
+        <path d="M14.582 9.723H6.48v1.62h8.102zM9.722 6.48H6.48v1.622h3.243zm9.72-.699V3.242h-3.563L11.344 0 6.8 3.242H3.238v2.543L0 8.102V24.3h22.684V8.1L19.44 5.786zM4.858 4.86h12.965v6.204l-6.48 5.343-6.485-5.347zm-3.238 6.485L8 16.19l-6.379 4.872zm1.617 11.34l6.434-5.223 1.668 1.273 1.668-1.27 6.433 5.22zm17.825-1.622l-6.387-4.859 6.386-4.86v9.723zm0 0" stroke="none" fillRule="nonzero" fill="rgba(64, 10, 111, 0.86)" fillOpacity="1" />
     </SvgIcon>
 )
 
