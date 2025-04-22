@@ -36,13 +36,13 @@ const CursorGlow = () => {
                     position: "absolute",
                     top: mousePos.y - 150,
                     left: mousePos.x - 150,
-                    width: 300,
-                    height: 300,
+                    width: 100,
+                    height: 100,
                     borderRadius: "50%",
                     background: "radial-gradient(circle, #7F5AF0 0%, #2CB1FF 100%)",
-                    opacity: 0.25,
-                    filter: "blur(80px)",
-                    mixBlendMode: "screen",
+                    opacity: 0.7, // 🔥 Stronger glow
+                    filter: "blur(100px)", // 👀 More focus
+                    mixBlendMode: "overlay", // or try: "normal", "overlay"
                     transition: "top 0.05s linear, left 0.05s linear",
                     display: { xs: "none", md: "block" },
                 }}
