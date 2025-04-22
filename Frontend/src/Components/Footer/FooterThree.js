@@ -13,7 +13,7 @@ const FooterThree = () => {
     component="h6"
     sx={{
       fontFamily: `'Orbitron', sans-serif`,
-      fontSize: '1.3rem',
+      fontSize: '1.25rem',
       fontWeight: 600,
       letterSpacing: '1px',
       background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
@@ -36,7 +36,7 @@ const FooterThree = () => {
       textAlign: 'center',
     }}
   >
-    That’s how we roll at BRC Hub 🚀
+    That’s how we roll at BRC Hub 
   </Typography>
 </Box>
 

@@ -27,10 +27,10 @@ const Bar = () => {
                 smooth={true}
                 duration={500}
             >
-                <ButtonBase sx={styles.SeeProjectBtn}>
+                {/* <ButtonBase sx={styles.SeeProjectBtn}>
                     See Projects
                     <ArrowForwardTwoToneIcon />
-                </ButtonBase>
+                </ButtonBase> */}
             </Link>
             <ButtonBase sx={styles.ToogleButton} onClick={toggleDrawer(true)} className={drawer ? "active" : ""}>
                 <Box className="ripple1"></Box>

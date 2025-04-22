@@ -1,6 +1,6 @@
 const styles = {
     Navs: {
-        textAlign: "centre",
+        textAlign: "center",
         a: {
             m: "0 10px",
             "&.active": {
