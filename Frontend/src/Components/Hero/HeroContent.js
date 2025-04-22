@@ -2,6 +2,7 @@ import { Box, Typography, ButtonBase } from "@mui/material";
 import { Link } from "react-scroll";
 import ArrowForwardTwoToneIcon from "@mui/icons-material/ArrowForwardTwoTone";
 import styles from "Styles/Hero/HeroContent.styles";
+import CursorGlow from "components/cursorglow.js"; // or adjust the path as per your folder structure
 
 const HeroContent = () => {
   return (
@@ -25,6 +26,7 @@ const HeroContent = () => {
           <ArrowForwardTwoToneIcon />
         </ButtonBase>
       </Link>
+      <cursorglow /> {/* 👈 Add it here */}
     </Box>
   );
 };
