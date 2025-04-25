@@ -20,9 +20,10 @@ const HeroContent = () => {
         ideas to grow more and solve the problem with the power of code.
       </Typography>
 
-      <Link to="portfolio" spy={true} smooth={true} duration={500}>
+      <Link to="contact" spy={true} smooth={true} duration={500}>
         <ButtonBase sx={styles.Button}>
-          Our Digital Builds
+          {/* Our Digital Builds */}
+          Let's Connect
           <ArrowForwardTwoToneIcon />
         </ButtonBase>
       </Link>
