@@ -47,7 +47,7 @@ const styles = {
         ">svg": {
             fontSize: "18px",
             mb: "-3px",
-            ml: "10px"
+            ml: "center"
         }
         
     },

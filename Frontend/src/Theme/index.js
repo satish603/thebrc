@@ -23,7 +23,7 @@ const theme = createTheme({
             main: "rgba(94, 12, 166, 0.65)", // Document Main Primary Color
             light: "#CECECE", // Document Light Color (Button Background)
             box_shadow_black: " #0000001c", // Box Shadow Black (Header Sticky)
-            success: "#4CAF50", // SuccessMessage Color
+            success: "rgb(23, 97, 72)", // SuccessMessage Color
             box_shadow_client: "#0000001c", /// Box Shadow Clinet Slider
             box_show_blog: "#FF4F3E21", //Box Shadow Blog Section
             box_shadow_blog_2: "#0000001a", // Box Shadow Blog Category
