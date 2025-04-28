@@ -45,6 +45,7 @@ import {
   };
   
   const Solution = () => {
+    const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [selectedSolution, setSelectedSolution] = useState(null);
     const [formModalOpen, setFormModalOpen] = useState(false);
