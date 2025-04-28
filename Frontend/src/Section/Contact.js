@@ -62,7 +62,7 @@ const Contact = () => {
                         src={MascotGreen}
                         alt="Green Mascot"
                         sx={{
-                            height: {lg:"500px",xs:"400px"},
+                            height: {lg:"500px",xs:"400px", xxs: "300px"},
                             width: "auto",
                             zIndex: 2,
                             marginTop: "-48px",  // Pulls it up close to the form
