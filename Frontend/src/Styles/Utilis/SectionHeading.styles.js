@@ -9,7 +9,7 @@ const styles = {
         fontSize: {
             xxs: "1rem",   // Very small devices (custom, if your theme supports it)
             xs:  "1.6rem",     // Phones
-            sm:  "2.5rem",   // Tablets
+            sm:  "2.2rem",   // Tablets
             md:  "2rem",     // Small laptops
             lg:  "2.3rem",   // Desktops
             xl:  "2.7rem",   // Large screens
