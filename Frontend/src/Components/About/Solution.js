@@ -9,7 +9,7 @@ import {
     ListItemText,
     IconButton,
   } from "@mui/material";
-  import { useState, useEffect, useRef } from "react";
+  import { useState, useEffect } from "react";
   import CloseIcon from "@mui/icons-material/Close";
   import ArrowBackIcon from "@mui/icons-material/ArrowBack";
   import { motion, useAnimation } from "framer-motion";
@@ -20,14 +20,6 @@ import {
   
   // Styles
   import styles from "Styles/About/Solution.styles";
-
-    // const YourComponent = () => {
-    // const nameRef = useRef(null);
-    // const emailRef = useRef(null);
-    // const mobileRef = useRef(null);
-    // const serviceRef = useRef(null); // if service dropdown/select
-    
-    
   
   const inputStyle = {
     padding: "10px 15px",
@@ -57,6 +49,13 @@ import {
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState({});
+    const [message, setMessage] = useState("");
+  
+    useEffect(() => {
+      if (selectedSubService) {
+        setMessage(`I need info related to ${selectedSubService}`);
+      }
+    }, [selectedSubService]);
   
     const handleOpen = (solution) => {
       setSelectedSolution(solution);
@@ -78,83 +77,80 @@ import {
       setName("");
       setMobile("");
       setEmail("");
+      setMessage("");
       setErrors({});
     };
   
     const validateForm = () => {
-        let formErrors = {};
-    
-        if (!name.trim()) formErrors.name = "Name is required";
-        if (!email.trim()) {
-          formErrors.email = "Email is required";
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          formErrors.email = "Invalid email address";
-        }
-        if (mobile && !/^\d{10}$/.test(mobile)) {
-          formErrors.mobile = "Phone number must be exactly 10 digits";
-        }
-        if (!selectedSubService) {
-          formErrors.service = "Please select a service.";
-        }
-    
-        setErrors(formErrors);
-        return Object.keys(formErrors).length === 0;
-      };
-      
+      let formErrors = {};
   
-      const handleFormSubmit = async () => {
-        if (!validateForm()) return;
-      
-        setLoading(true);
-      
-        // Build payload for Mail-Porter
-        const payload = {
-          name: name,
-          email: email,
-          mobile: mobile,
-          message: `I need info related to ${selectedSubService}`,
-          brand: "brchub"
-        };
-      
-        try {
-          const response = await fetch(
-            "https://mail-porter.vercel.app/api/email/send-email/gmail",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "x-api-key": "SuperSecretApiKey123!@#"
-              },
-              body: JSON.stringify(payload)
-            }
-          );
-      
-          if (response.ok) {
-            // close form, show confirmation
-            setFormModalOpen(false);
-            setConfirmationOpen(true);
-            // auto-hide confirmation after 3s
-            setTimeout(() => setConfirmationOpen(false), 3000);
-      
-            // reset fields
-            setName("");
-            setMobile("");
-            setEmail("");
-            setSelectedSubService("");
-            setErrors({});
-          } else {
-            console.error("API Error:", await response.text());
-            // you might show an error toast here
-          }
-        } catch (err) {
-          console.error("Network Error:", err);
-          // you might show an error toast here
-        } finally {
-          setLoading(false);
-        }
+      if (!name.trim()) formErrors.name = "Name is required";
+      if (!email.trim()) {
+        formErrors.email = "Email is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        formErrors.email = "Invalid email address";
+      }
+      if (!mobile.trim()) {
+        formErrors.mobile = "Please enter your mobile number.";
+ 
+      } else if (!/^\d{10,}$/.test(mobile.trim())) {
+        formErrors.mobile = "Mobile number must be at least 10 digits.";
+        
+      }
+      if (!selectedSubService) {
+        formErrors.service = "Please select a service.";
+      }
+  
+      setErrors(formErrors);
+      return Object.keys(formErrors).length === 0;
+    };
+  
+    const handleFormSubmit = async () => {
+      if (!validateForm()) return;
+  
+      setLoading(true);
+  
+      const payload = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        message: message,
+        brand: "brchub",
       };
-      
-      
+  
+      try {
+        const response = await fetch(
+          "https://mail-porter.vercel.app/api/email/send-email/gmail",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": "SuperSecretApiKey123!@#",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+  
+        if (response.ok) {
+          setFormModalOpen(false);
+          setConfirmationOpen(true);
+          setTimeout(() => setConfirmationOpen(false), 3000);
+  
+          setName("");
+          setMobile("");
+          setEmail("");
+          setSelectedSubService("");
+          setMessage("");
+          setErrors({});
+        } else {
+          console.error("API Error:", await response.text());
+        }
+      } catch (err) {
+        console.error("Network Error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
   
     return (
       <Box sx={{ mt: "4em" }}>
@@ -212,7 +208,7 @@ import {
           })}
         </Grid>
   
-        {/* --- Main Modal --- */}
+        {/* Main Modal */}
         <Modal open={open} onClose={handleClose}>
           <Paper
             sx={{
@@ -275,7 +271,6 @@ import {
                   ))}
                 </List>
   
-                {/* CTA Button */}
                 <Box sx={{ mt: 3, textAlign: "center" }}>
                   <Box
                     onClick={handleFormModalOpen}
@@ -304,7 +299,7 @@ import {
           </Paper>
         </Modal>
   
-        {/* --- Form Modal --- */}
+        {/* Form Modal */}
         <Modal open={formModalOpen} onClose={handleFormModalClose}>
           <Paper
             sx={{
@@ -333,46 +328,40 @@ import {
             </Typography>
   
             <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <input
+              <input
                 placeholder="Name"
                 style={inputStyle}
-                //   ref={nameRef}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                />
-                {errors.name && <div style={errorTextStyle}>{errors.name}</div>}
-
+              />
+              {errors.name && <div style={errorTextStyle}>{errors.name}</div>}
   
               <input
-                    type="text"
-                    placeholder="Mobile Number (Optional)"
-                    value={mobile}
-                    // ref={mobileRef}
-                    maxLength={10} // LIMIT input to max 10 digits
-                    onChange={(e) => {
-                        const value = e.target.value;
-                        if (/^\d*$/.test(value)) { // only allow digits
-                        setMobile(value);
-                        }
-                    }}
-                 style={inputStyle}
-                />
-                {errors.mobile && <div style={errorTextStyle}>{errors.mobile}</div>}
-
+                type="text"
+                placeholder="Mobile Number"
+                value={mobile}
+                maxLength={10}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) {
+                    setMobile(value);
+                  }
+                }}
+                style={inputStyle}
+              />
+              {errors.mobile && <div style={errorTextStyle}>{errors.mobile}</div>}
   
               <input
                 type="email"
                 placeholder="Email"
                 style={inputStyle}
                 value={email}
-                // ref={emailRef}
                 onChange={(e) => setEmail(e.target.value)}
               />
               {errors.email && <div style={errorTextStyle}>{errors.email}</div>}
   
               <select
                 value={selectedSubService}
-                // ref={serviceRef}
                 onChange={(e) => setSelectedSubService(e.target.value)}
                 style={{ ...inputStyle, cursor: "pointer" }}
               >
@@ -387,8 +376,8 @@ import {
   
               <textarea
                 rows={3}
-                readOnly
-                value={selectedSubService ? `I need info related to ${selectedSubService}` : ""}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Message"
                 style={{ ...inputStyle, resize: "none" }}
               />
@@ -420,7 +409,7 @@ import {
           </Paper>
         </Modal>
   
-        {/* --- Success Modal --- */}
+        {/* Success Modal */}
         <Modal open={confirmationOpen} onClose={() => setConfirmationOpen(false)}>
           <Paper
             sx={{
@@ -460,7 +449,7 @@ import {
         `}</style>
       </Box>
     );
-};
+  };
   
   export default Solution;
   
