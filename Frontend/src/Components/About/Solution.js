@@ -120,7 +120,7 @@ import {
   
       try {
         const response = await fetch(
-          "https://mail-porter.vercel.app/api/email/send-email/gmail",
+          "https://mail-porter.vercel.app/api/email/send-email/privateemail",
           {
             method: "POST",
             headers: {
