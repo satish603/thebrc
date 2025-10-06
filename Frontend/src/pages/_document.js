@@ -10,6 +10,35 @@ export default class MyDocument extends Document {
                 <Head>
                     <meta name="emotion-insertion-point" content="" /> {/* ✅ FIX HERE */}
                     <link rel="shortcut icon" href="/static/favicon.ico" />
+
+                    {/* ✅ Google tag (gtag.js) */}
+                    <script
+                        async
+                        src="https://www.googletagmanager.com/gtag/js?id=G-KH67ZDJMXC"
+                    ></script>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', 'G-KH67ZDJMXC');
+                            `,
+                        }}
+                    />
+                        <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            name: "BRC Hub LLP",
+                            url: "https://thebrchub.tech", // 👈 replace with your real domain
+                            logo: "https://thebrchub.tech/og-image.png", // 👈 full absolute URL (must be public)
+                            }),
+                        }}
+                        />
+
                     {this.props.emotionStyleTags}
                 </Head>
                 <body>
