@@ -11,7 +11,7 @@ const Privacy = ({ handleClose }) => {
                     sx={{ color: "text.primary" }}
                 >
                     <h1>Privacy Policy for Blazing Render Creation Hub LLP</h1>
-                    <p>At BRC HUB (Blazing Render Creation Hub LLP), accessible from <a href="https://thebrchub.com" target="_blank">thebrchub.com</a>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and safeguard your information when you interact with our website or services.</p>
+                    <p>At BRC HUB (Blazing Render Creation Hub LLP), accessible from <a href="https://thebrchub.com" target="_blank" rel="noreferrer">thebrchub.com</a>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and safeguard your information when you interact with our website or services.</p>
 
                     <h2>1. Consent</h2>
                     <p>By using our website or services, you consent to the terms of this Privacy Policy and agree to our practices described herein.</p>
@@ -51,18 +51,18 @@ const Privacy = ({ handleClose }) => {
                     </ul>
                     <p>To exercise any of these rights, contact us using the details below.</p>
 
-                    <h2>9. Children's Privacy</h2>
+                    <h2>9. Children&apos;s Privacy</h2>
                     <p>Our services are not directed at individuals under the age of 13. We do not knowingly collect personal data from children. If such data is discovered, we will delete it immediately.</p>
 
                     <h2>10. Changes to This Policy</h2>
-                    <p>We may update this Privacy Policy occasionally. Any changes will be posted on this page with a revised "Last Updated" date.</p>
+                    <p>We may update this Privacy Policy occasionally. Any changes will be posted on this page with a revised &quot;Last Updated&quot; date.</p>
 
                     <h2>11. Contact Us</h2>
                     <p>If you have any questions or concerns about this Privacy Policy, reach out to us at:</p>
                     <ul>
                         <li>Email: <strong>contact@brchub.in</strong></li>
-                        <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank">instagram.com/thebrchub</a></li>
-                        <li>Website: <a href="https://thebrchub.com" target="_blank">www.thebrchub.com</a></li>
+                        <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank" rel="noreferrer">instagram.com/thebrchub</a></li>
+                        <li>Website: <a href="https://thebrchub.com" target="_blank" rel="noreferrer">www.thebrchub.com</a></li>
                     </ul>
                     <p><strong>Last updated:</strong> April 15, 2025</p>
                 </DialogContentText>

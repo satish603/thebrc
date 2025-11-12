@@ -23,7 +23,7 @@ const HeroContent = () => {
       <Link to="contact" spy={true} smooth={true} duration={500}>
         <ButtonBase sx={styles.Button}>
           {/* Our Digital Builds */}
-          Let's Connect
+          Let&apos;s Connect
           <ArrowForwardTwoToneIcon />
         </ButtonBase>
       </Link>

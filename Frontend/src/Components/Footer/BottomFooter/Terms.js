@@ -18,7 +18,7 @@ const Terms = ({ handleClose }) => {
                                 <p>Welcome to Blazing Render Creation Hub LLP. By using our services or accessing our website, you agree to the following terms and conditions.</p>
 
                                 <h2>1. Company Details</h2>
-                                <p><strong>Company:</strong> Blazing Render Creation Hub LLP ("BRC HUB")</p>
+                                <p><strong>Company:</strong> Blazing Render Creation Hub LLP (&quot;BRC HUB&quot;)</p>
                                 <p><strong>Based in:</strong> India</p>
                                 <p><strong>Focus:</strong> Web development, design, animation, branding, VFX, and digital experiences.</p>
 
@@ -36,7 +36,7 @@ const Terms = ({ handleClose }) => {
                                 </ul>
 
                                 <h2>5. Confidentiality</h2>
-                                <p>We respect our clients' confidentiality. Any materials shared with BRC HUB for project purposes are treated with strict privacy unless consent is given for public showcase.</p>
+                                <p>We respect our clients&apos; confidentiality. Any materials shared with BRC HUB for project purposes are treated with strict privacy unless consent is given for public showcase.</p>
 
                                 <h2>6. Revisions & Delivery</h2>
                                 <p>Revisions are limited based on the service agreement. Final delivery will be made once all dues are cleared.</p>
@@ -57,8 +57,8 @@ const Terms = ({ handleClose }) => {
                                 <p>If you have any questions about these Terms and Conditions, you can reach us at:</p>
                                 <ul>
                                     <li>Email: <strong>connect.brchubllp@gmail.com</strong></li>
-                                    <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank">instagram.com/thebrchub</a></li>
-                                    <li>Website: <a href="https://thebrchub.com" target="_blank">www.thebrchub.com</a></li>
+                                    <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank" rel="noreferrer">instagram.com/thebrchub</a></li>
+                                    <li>Website: <a href="https://thebrchub.com" target="_blank" rel="noreferrer">www.thebrchub.com</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import Script from 'next/script';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
@@ -15,7 +16,7 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
 
-import { useEffect } from 'react'; // 🟣 Add this
+import { useEffect } from 'react'; // 🟣 kept (you can remove if unused)
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -36,6 +37,38 @@ export default function MyApp(props) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
+
+      {/* Sitewide scripts (moved from _document.js) */}
+      {/* Google Tag (gtag) */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-KH67ZDJMXC"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-KH67ZDJMXC');
+        `}
+      </Script>
+
+      {/* JSON-LD organization schema */}
+      <Script
+        id="organization-schema"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "BRC Hub LLP",
+            url: "https://thebrchub.tech",
+            logo: "https://thebrchub.tech/og-image.png",
+          }),
+        }}
+      />
+
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Component {...pageProps} />
