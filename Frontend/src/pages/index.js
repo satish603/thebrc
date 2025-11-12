@@ -19,7 +19,7 @@ const index = () => {
       <Header />
       <Hero />
       <About />
-      {/* <Portfolio /> */}
+      <Portfolio />
       <Skill />
       <Client />
       {/* <Blog /> */}

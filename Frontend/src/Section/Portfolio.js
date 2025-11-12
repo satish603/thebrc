@@ -1,6 +1,7 @@
-import { useState, useRef, useMemo } from "react";
-import { Container, Tab, Box, Fade, Slide } from "@mui/material";
-import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { useState } from "react";
+import { Container, Box } from "@mui/material";
+// import { TabContext, TabList, TabPanel } from '@mui/lab';
+// import { Tab } from "@mui/material";
 
 //SectionHeading
 import SectionHeading from "Utilis/SectionHeading";
@@ -18,24 +19,31 @@ import Particle from "Assets/portfolio/particle.png";
 import styles from "Styles/Portfolio/Portfolio.styles";
 
 const Portfolio = () => {
-    const [Items, setItems] = useState(Portfolios);
-    const [value, setValue] = useState('1');
-    const containerRef = useRef(null);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const filterItem = (filterItem) => {
-        const updateItem = Portfolios.filter((curElem) => {
-            return curElem.filter === filterItem;
-        });
-        setItems(updateItem);
-    }
-    useMemo(() => {
-        const updateItem = Portfolios.filter((curElem) => {
-            return curElem.filter === "web";
-        });
-        setItems(updateItem);
-    }, [Portfolios])
+    // Display all items without filtering
+    const [Items] = useState(Portfolios);
+    
+    // COMMENTED OUT: Filter functionality for future use
+    // const [value, setValue] = useState('1');
+    // const containerRef = useRef(null);
+    
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
+    
+    // const filterItem = (filterItem) => {
+    //     const updateItem = Portfolios.filter((curElem) => {
+    //         return curElem.filter === filterItem;
+    //     });
+    //     setItems(updateItem);
+    // }
+    
+    // useMemo(() => {
+    //     const updateItem = Portfolios.filter((curElem) => {
+    //         return curElem.filter === "web";
+    //     });
+    //     setItems(updateItem);
+    // }, [Portfolios])
+
     return (
         <Container maxWidth={false} disableGutters as="section" sx={styles.Container} id="portfolio">
             <SectionHeading
@@ -43,7 +51,9 @@ const Portfolio = () => {
                 value2="in Our Code Story"
                 border={false}
             />
-            <TabContext value={value}>
+            
+            {/* COMMENTED OUT: Tab navigation for future use */}
+            {/* <TabContext value={value}>
                 <Box sx={{ mt: "3em" }}>
                     <TabList
                         onChange={handleChange}
@@ -55,6 +65,7 @@ const Portfolio = () => {
                         }}
                         sx={styles.ButtonGroup}
                     >
+                        <Tab label="All Work" value="0" onClick={() => setItems(Portfolios)} />
                         <Tab label="Web Development" value="1" onClick={() => filterItem('web')} />
                         <Tab label="App Development" value="2" onClick={() => filterItem('app')} />
                         <Tab label="UI/UX" value="3" onClick={() => filterItem('ui')} />
@@ -62,74 +73,15 @@ const Portfolio = () => {
                         <Tab label="Animation & VFX" value="5" onClick={() => filterItem('animation')} />
                     </TabList>
                 </Box>
-                <TabPanel value="1" sx={{ pr: "0px", mt: "15px" }}>
-                    <Box ref={containerRef}>
-                        <Fade in={value === "1" ? true : false} timeout={2000}>
-                            <Box>
-                                <Slide in={value === "1" ? true : false} timeout={800} direction="left" container={containerRef.current}>
-                                    <Box>
-                                        <Work works={Items} />
-                                    </Box>
-                                </Slide>
-                            </Box>
-                        </Fade>
-                    </Box>
-                </TabPanel>
-                <TabPanel value="2" sx={{ pr: "0px", mt: "15px" }}>
-                    <Box ref={containerRef}>
-                        <Fade in={value === "2" ? true : false} timeout={2000}>
-                            <Box>
-                                <Slide in={value === "2" ? true : false} direction="left" timeout={800} container={containerRef.current}>
-                                    <Box>
-                                        <Work works={Items} />
-                                    </Box>
-                                </Slide>
-                            </Box>
-                        </Fade>
-                    </Box>
-                </TabPanel>
-                <TabPanel value="3" sx={{ pr: "0px", mt: "15px" }}>
-                    <Box ref={containerRef}>
-                        <Fade in={value === "3" ? true : false} timeout={2000}>
-                            <Box>
-                                <Slide in={value === "3" ? true : false} direction="left" container={containerRef.current} timeout={800}>
-                                    <Box>
-                                        <Work works={Items} />
-                                    </Box>
-                                </Slide>
-                            </Box>
-                        </Fade>
-                    </Box>
-                </TabPanel>
-                <TabPanel value="4" sx={{ pr: "0px", mt: "15px" }}>
-                    <Box ref={containerRef}>
-                        <Fade in={value === "4" ? true : false} timeout={2000}>
-                            <Box>
-                                <Slide in={value === "4" ? true : false} direction="left" timeout={800} container={containerRef.current}>
-                                    <Box>
-                                        <Work works={Items} />
-                                    </Box>
-                                </Slide>
-                            </Box>
-                        </Fade>
-                    </Box>
-                </TabPanel>
-                <TabPanel value="5" sx={{ pr: "0px", mt: "15px" }}>
-                    <Box ref={containerRef}>
-                        <Fade in={value === "5" ? true : false} timeout={2000}>
-                            <Box>
-                                <Slide in={value === "5" ? true : false} direction="left" timeout={800} container={containerRef.current}>
-                                    <Box>
-                                        <Work works={Items} />
-                                    </Box>
-                                </Slide>
-                            </Box>
-                        </Fade>
-                    </Box>
-                </TabPanel>
-            </TabContext>
+            </TabContext> */}
+
+            {/* Display all work items */}
+            <Box sx={{ mt: "3em" }}>
+                <Work works={Items} />
+            </Box>
+
             <Box component="img" src={Particle} alt="particle" sx={styles.Particle} />
-        </Container >
+        </Container>
     );
 };
 

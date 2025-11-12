@@ -429,7 +429,7 @@ import {
               🎉 Query Submitted!
             </Typography>
             <Typography sx={{ fontSize: "0.95rem", color: "gray" }}>
-              We'll get back to you soon!
+              We&apos;ll get back to you soon!
             </Typography>
           </Paper>
         </Modal>
