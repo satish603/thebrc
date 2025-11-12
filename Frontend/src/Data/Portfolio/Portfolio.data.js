@@ -41,19 +41,19 @@ export default [
         name: "Web Development",
         filter: "web",
         image: Work_6,
-        url: "https://industrial-forge.vercel.app//"
+        url: "https://byxbyte-media.vercel.app/"
     },
     {
         name: "Web Development",
         filter: "web",
         image: Work_7,
-        url: "https://industrial-forge.vercel.app//"
+        url: "https://luxe-property-website.vercel.app/"
     },
     {
         name: "Web Development",
         filter: "web",
         image: Work_8,
-        url: "https://industrial-forge.vercel.app//"
+        url: "https://digivala.in/"
     },
     
     {
