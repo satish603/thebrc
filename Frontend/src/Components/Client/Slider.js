@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Box, ButtonBase, Avatar, Typography, Rating } from "@mui/material";
 import useEmblaCarousel from "embla-carousel-react";
 
-//Icons
-import { ChevronLeft, ChevronRight } from "Utilis/Icons";
+//Icons - You can remove these imports if not used elsewhere
+// import { ChevronLeft, ChevronRight } from "Utilis/Icons";
 
 //Data
 import Clients from "Data/Client/Client.data";
@@ -14,7 +14,6 @@ import styles from "Styles/Client/Slider.styles";
 const Sliders = () => {
     const [viewportRef, embla] = useEmblaCarousel({
         dragFree: true,
-        // containScroll: "trimSnaps"
         containScroll: false
     });
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -33,25 +32,6 @@ const Sliders = () => {
         embla.on("select", onSelect);
         onSelect();
     }, [embla, onSelect]);
-    
-    
-    // useEffect(() => {
-    //     if (!embla) return;
-    
-    //     let animationFrame;
-    //     const step = 0.15; // Adjust for slower or faster speed
-    
-    //     const scrollSmoothly = () => {
-    //         if (!embla) return;
-    //         embla.scrollTo(embla.scrollProgress() + step);
-    //         animationFrame = requestAnimationFrame(scrollSmoothly);
-    //     };
-    
-    //     animationFrame = requestAnimationFrame(scrollSmoothly);
-    
-    //     return () => cancelAnimationFrame(animationFrame);
-    // }, [embla]);
-    
     
     return (
         <Box sx={{ mt: "2em" }}>
@@ -93,24 +73,78 @@ const Sliders = () => {
 };
 export default Sliders;
 
-//Prev Button
+//Prev Button - Updated to match Work.js style
 const PrevButton = ({ enabled, onClick }) => (
-    <ButtonBase
-        className={!enabled ? "disable" : ""}
-        onClick={onClick}
-        disabled={!enabled}
+    <Box
+        onClick={enabled ? onClick : undefined}
+        sx={{
+            width: { xs: 50, md: 56 },
+            height: { xs: 50, md: 56 },
+            borderRadius: "50%",
+            background: enabled ? "rgba(3, 42, 121, 0.6)" : "rgba(3, 42, 121, 0.3)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: enabled ? "pointer" : "not-allowed",
+            transition: "all 0.3s ease",
+            opacity: enabled ? 1 : 0.5,
+            "&:hover": enabled ? {
+                background: "rgba(13, 129, 202, 0.8)",
+                transform: "scale(1.1)",
+            } : {},
+        }}
     >
-        <ChevronLeft />
-    </ButtonBase>
-);
-//Next Button
-const NextButton = ({ enabled, onClick }) => (
-    <ButtonBase
-        className={!enabled ? "disable" : ""}
-        onClick={onClick}
-        disabled={!enabled}
-    >
-        <ChevronRight />
-    </ButtonBase>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <polyline points="15 18 9 12 15 6" />
+        </svg>
+    </Box>
 );
 
+//Next Button - Updated to match Work.js style
+const NextButton = ({ enabled, onClick }) => (
+    <Box
+        onClick={enabled ? onClick : undefined}
+        sx={{
+            width: { xs: 50, md: 56 },
+            height: { xs: 50, md: 56 },
+            borderRadius: "50%",
+            background: enabled ? "rgba(3, 42, 121, 0.6)" : "rgba(3, 42, 121, 0.3)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: enabled ? "pointer" : "not-allowed",
+            transition: "all 0.3s ease",
+            opacity: enabled ? 1 : 0.5,
+            "&:hover": enabled ? {
+                background: "rgba(13, 129, 202, 0.8)",
+                transform: "scale(1.1)",
+            } : {},
+        }}
+    >
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <polyline points="9 18 15 12 9 6" />
+        </svg>
+    </Box>
+);

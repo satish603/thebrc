@@ -8,28 +8,25 @@ import Link from "next/link";
  */
 const Work = ({ works = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
 
-  // Auto-rotate carousel
+  // Auto-rotate carousel - ALWAYS ON (removed isAutoPlaying state)
   useEffect(() => {
-    if (!isAutoPlaying || works.length === 0) return;
+    if (works.length === 0) return;
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % works.length);
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, works.length]);
+  }, [works.length]);
 
   const handlePrev = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex((prev) => (prev - 1 + works.length) % works.length);
   };
 
   const handleNext = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex((prev) => (prev + 1) % works.length);
   };
 
@@ -68,6 +65,9 @@ const Work = ({ works = [] }) => {
     const isActive = offset === 0;
     const absOffset = Math.abs(offset);
     
+    // FIXED: Hide cards that are far away (wrapping around)
+    const shouldHide = absOffset > 3;
+    
     // Position calculations
     const translateX = offset * 65; // Horizontal spread
     const translateY = absOffset * 15; // Vertical lift
@@ -83,10 +83,11 @@ const Work = ({ works = [] }) => {
         rotateZ(${rotateZ}deg) 
         scale(${scale})
       `,
-      zIndex: 100 - absOffset * 10,
-      opacity: Math.max(0.3, 1 - absOffset * 0.25),
+      zIndex: shouldHide ? -10 : 100 - absOffset * 10,
+      opacity: shouldHide ? 0 : Math.max(0.3, 1 - absOffset * 0.25),
       filter: isActive ? 'brightness(1) blur(0px)' : `brightness(0.7) blur(${Math.min(absOffset * 1.5, 3)}px)`,
       pointerEvents: isActive ? 'auto' : 'none',
+      visibility: shouldHide ? 'hidden' : 'visible',
     };
   };
 
@@ -340,7 +341,6 @@ const Work = ({ works = [] }) => {
               key={idx}
               onClick={() => {
                 setCurrentIndex(idx);
-                setIsAutoPlaying(false);
               }}
               sx={{
                 width: currentIndex === idx ? 32 : 8,
@@ -397,40 +397,7 @@ const Work = ({ works = [] }) => {
         </Box>
       </Box>
 
-      {/* Play/Pause Toggle */}
-      <Box
-        onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-        sx={{
-          position: "absolute",
-          top: { xs: 20, md: 30 },
-          right: { xs: 20, md: 40 },
-          px: 2.5,
-          py: 1,
-          borderRadius: "100px",
-          background: "rgba(0,0,0,0.6)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-          zIndex: 10,
-          "&:hover": {
-            background: "rgba(0,0,0,0.75)",
-            transform: "scale(1.05)",
-          },
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            color: "#fff",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-          }}
-        >
-          {isAutoPlaying ? "⏸ Pause" : "▶ Play"}
-        </Typography>
-      </Box>
+      {/* REMOVED: Play/Pause Toggle button */}
     </Box>
   );
 };
