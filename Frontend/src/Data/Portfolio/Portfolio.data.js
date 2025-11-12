@@ -34,7 +34,7 @@ export default [
         name: "Web Development",
         filter: "web",
         image: Work_4,
-        url: "https://industrial-forge.vercel.app//"
+        url: "https://industrial-forge.vercel.app/"
     },
     
     {
