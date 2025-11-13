@@ -91,8 +91,13 @@ function SolutionItem({ solution, index, onOpen }) {
 
 const Solution = () => {
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // main modal (either direct description or category selector)
   const [selectedSolution, setSelectedSolution] = useState(null);
+
+  // NEW: for when a solution (like Web & App) exposes internal sub-cards
+  const [selectedSubItem, setSelectedSubItem] = useState(null); // object: { key, title, popupDescription, subServices, ... }
+  const [subDescOpen, setSubDescOpen] = useState(false); // description modal for the chosen sub-item
+
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [selectedSubService, setSelectedSubService] = useState("");
   const [confirmationOpen, setConfirmationOpen] = useState(false);
@@ -118,9 +123,24 @@ const Solution = () => {
   const handleClose = () => {
     setOpen(false);
     setSelectedSolution(null);
+    // reset any sub-item selection
+    setSelectedSubItem(null);
+    setSubDescOpen(false);
+  };
+
+  // When a sub-card (like Web or App inside the merged modal) is clicked
+  const handleOpenSubItem = (subItem) => {
+    setSelectedSubItem(subItem);
+    setSubDescOpen(true);
+  };
+
+  const handleCloseSubDesc = () => {
+    setSelectedSubItem(null);
+    setSubDescOpen(false);
   };
 
   const handleFormModalOpen = () => {
+    // if subDescOpen and selectedSubItem set, pre-select service list from that sub-item
     setFormModalOpen(true);
   };
 
@@ -145,10 +165,8 @@ const Solution = () => {
     }
     if (!mobile.trim()) {
       formErrors.mobile = "Please enter your mobile number.";
-
     } else if (!/^\d{10,}$/.test(mobile.trim())) {
       formErrors.mobile = "Mobile number must be at least 10 digits.";
-
     }
     if (!selectedSubService) {
       formErrors.service = "Please select a service.";
@@ -205,6 +223,13 @@ const Solution = () => {
     }
   };
 
+  // helper to get subServices array for the form dropdown
+  const getCurrentSubServices = () => {
+    if (selectedSubItem && selectedSubItem.subServices) return selectedSubItem.subServices;
+    if (selectedSolution?.subServices) return selectedSolution.subServices;
+    return [];
+  };
+
   return (
     <Box sx={{ mt: "4em" }}>
       <Grid container spacing={2}>
@@ -213,8 +238,201 @@ const Solution = () => {
         ))}
       </Grid>
 
-      {/* Main Modal */}
-      <Modal open={open} onClose={handleClose}>
+      {/* Main Modal — cleaner UI */}
+<Modal open={open} onClose={handleClose}>
+  <Paper
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      p: { xs: 3, md: 5 },
+      width: { xs: "92%", sm: 720 },
+      bgcolor: "#fff",
+      borderRadius: "18px",
+      boxShadow: "0 20px 60px rgba(17, 63, 155, 0.45)",
+      color: "#0f172a",
+      outline: "none",
+    }}
+  >
+    {/* Close */}
+    <IconButton
+      onClick={handleClose}
+      aria-label="close"
+      sx={{
+        position: "absolute",
+        top: 12,
+        right: 12,
+        color: "rgba(15,23,42,0.6)",
+        background: "transparent",
+        "&:hover": { background: "rgba(15,23,42,0.04)" },
+      }}
+    >
+      <CloseIcon />
+    </IconButton>
+
+    {/* Title */}
+    <Typography
+      variant="h5"
+      sx={{
+        fontWeight: 800,
+        textAlign: "center",
+        color: "#111827",
+        mb: 1,
+        fontSize: { xs: "1.25rem", md: "1.6rem" },
+      }}
+    >
+      {selectedSolution?.title}
+    </Typography>
+
+    {/* Subtitle */}
+    <Typography
+      sx={{
+        textAlign: "center",
+        color: "rgba(15,23,42,0.7)",
+        fontSize: "0.95rem",
+        maxWidth: 900,
+        margin: "0 auto",
+        mb: 3,
+        lineHeight: 1.5,
+      }}
+    >
+      {selectedSolution?.popupDescription}
+    </Typography>
+
+    {/* If subCategories present -> show two nice cards */}
+    {selectedSolution?.subCategories ? (
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          alignItems: "stretch",
+          justifyContent: "center",
+          px: { xs: 1, md: 2 },
+        }}
+      >
+        {selectedSolution.subCategories.map((sub) => (
+          <Grid item xs={12} sm={6} key={sub.key} sx={{ display: "flex" }}>
+            <Paper
+              onClick={() => handleOpenSubItem(sub)}
+              elevation={0}
+              sx={{
+                cursor: "pointer",
+                p: { xs: 3, md: 4 },
+                borderRadius: 12,
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                border: "1px solid rgba(15,23,42,0.06)",
+                background: "linear-gradient(180deg, #ffffff, #fbfbfd)",
+                transition: "transform 200ms ease, box-shadow 200ms ease",
+                boxShadow: "0 6px 20px rgba(2,6,23,0.06)",
+                "&:hover": {
+                  transform: "translateY(-6px)",
+                  boxShadow: "0 14px 40px rgba(2,6,23,0.08)",
+                },
+              }}
+            >
+              <Box>
+                <Typography
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: { xs: "1rem", md: "1.05rem" },
+                    color: "#0f172a",
+                    mb: 1,
+                  }}
+                >
+                  {sub.title}
+                </Typography>
+                <Typography sx={{ color: "rgba(15,23,42,0.65)", fontSize: "0.95rem", lineHeight: 1.5 }}>
+                  {sub.popupDescription}
+                </Typography>
+              </Box>
+
+              {/* Accent / badge at bottom */}
+              <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
+                <Box
+                  sx={{
+                    px: 3,
+                    py: "8px",
+                    borderRadius: "999px",
+                    fontWeight: 700,
+                    fontSize: "0.85rem",
+                    background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
+                    color: "#fff",
+                    boxShadow: "0 6px 18px rgba(123,44,191,0.18)",
+                    textAlign: "center",
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                    "&:hover": {
+                      transform: "translateY(-3px)",
+                      boxShadow: "0 10px 25px rgba(123,44,191,0.25)",
+                    },
+                  }}
+                >
+                  Explore
+                </Box>
+              </Box>
+
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    ) : (
+      /* fallback: original single-solution layout (unchanged content) */
+      <>
+        <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.8)", fontWeight: 400 }}>
+          {selectedSolution?.popupDescription}
+        </Typography>
+
+        <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.9)", fontWeight: 700 }}>
+          {selectedSolution?.popupaboutservices}
+        </Typography>
+
+        <List dense sx={{ mb: 2 }}>
+          {selectedSolution?.subServices?.map((sub, idx) => (
+            <ListItem key={idx} disablePadding sx={{ mb: 1 }}>
+              <ListItemText
+                primary={<Typography sx={{ color: "#0f172a", fontSize: "0.95rem" }}>✔️ {sub}</Typography>}
+              />
+            </ListItem>
+          ))}
+        </List>
+
+        <Box sx={{ mt: 2, textAlign: "center" }}>
+          <Box
+            onClick={() => {
+              if (selectedSolution.subServices && selectedSolution.subServices[0]) {
+                setSelectedSubService(selectedSolution.subServices[0]);
+              }
+              handleFormModalOpen();
+            }}
+            sx={{
+              px: 4,
+              py: "10px",
+              borderRadius: "10px",
+              display: "inline-block",
+              background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
+              color: "#fff",
+              fontWeight: 700,
+              letterSpacing: 0.2,
+              cursor: "pointer",
+              boxShadow: "0 8px 30px rgba(92,56,154,0.12)",
+              transition: "transform 160ms ease",
+              "&:hover": { transform: "translateY(-3px)" },
+            }}
+          >
+            Get Started
+          </Box>
+        </Box>
+      </>
+    )}
+  </Paper>
+</Modal>
+
+
+      {/* Sub-item Description Modal (for subCategories like Web / App when the main card had multiple choices) */}
+      <Modal open={subDescOpen} onClose={handleCloseSubDesc}>
         <Paper
           sx={{
             position: "absolute",
@@ -232,13 +450,13 @@ const Solution = () => {
           }}
         >
           <IconButton
-            onClick={handleClose}
+            onClick={handleCloseSubDesc}
             sx={{ position: "absolute", top: 8, right: 8, color: "#888" }}
           >
             <CloseIcon />
           </IconButton>
 
-          {selectedSolution && (
+          {selectedSubItem && (
             <>
               <Typography
                 variant="h5"
@@ -251,19 +469,19 @@ const Solution = () => {
                   textAlign: "center",
                 }}
               >
-                {selectedSolution.title}
+                {selectedSubItem.title}
               </Typography>
 
               <Typography sx={{ mb: 2, color: "black", fontWeight: 300 }}>
-                {selectedSolution.popupDescription}
+                {selectedSubItem.popupDescription}
               </Typography>
 
               <Typography sx={{ mb: 2, color: "black", fontWeight: 700 }}>
-                {selectedSolution.popupaboutservices}
+                {selectedSubItem.popupaboutservices || "Our services include:"}
               </Typography>
 
               <List>
-                {selectedSolution.subServices.map((sub, index) => (
+                {selectedSubItem.subServices.map((sub, index) => (
                   <ListItem key={index} disablePadding sx={{ mb: 1 }}>
                     <ListItemText
                       primary={
@@ -278,7 +496,13 @@ const Solution = () => {
 
               <Box sx={{ mt: 3, textAlign: "center" }}>
                 <Box
-                  onClick={handleFormModalOpen}
+                  onClick={() => {
+                    // preselect first subservice (helpful UX)
+                    if (selectedSubItem.subServices && selectedSubItem.subServices[0]) {
+                      setSelectedSubService(selectedSubItem.subServices[0]);
+                    }
+                    handleFormModalOpen();
+                  }}
                   sx={{
                     px: 3,
                     py: 1.2,
@@ -371,7 +595,7 @@ const Solution = () => {
               style={{ ...inputStyle, cursor: "pointer" }}
             >
               <option value="">Select Service</option>
-              {selectedSolution?.subServices.map((sub, i) => (
+              {getCurrentSubServices().map((sub, i) => (
                 <option key={i} value={sub}>
                   {sub}
                 </option>

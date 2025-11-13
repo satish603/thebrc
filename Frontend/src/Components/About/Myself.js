@@ -20,7 +20,7 @@ const Myself = () => {
                 Growing with Purpose
                 </Typography>
                 <Typography variant="body1" component="p" className="sdjh" sx={styles.Description}>
-                We’re a passionate team of coders and creatives, building sleek, high-performing digital experiences that make ideas come alive. From websites and interfaces to stunning animations and VFX, we turn imagination into impact. Design meets purpose — that’s our mantra.
+                We’re a passionate team of coders and creatives, building sleek, high-performing digital experiences that make ideas come alive. From websites and interfaces to stunning animations and VFX, we turn imagination into impact. Design meets purpose, that’s our mantra.
                 </Typography>
                 <Box sx={{ my: "28px" }}>
                     <Stack direction="row" sx={styles.Features}>

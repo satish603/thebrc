@@ -10,6 +10,26 @@ import Work_8 from"Assets/portfolio/digivala.png"
 import Work_9 from"Assets/portfolio/gita_2.png"
 import Work_10 from"Assets/portfolio/payzo.png"
 import Work_11 from"Assets/portfolio/graphics.png"
+import Graphic_1 from "Assets/portfolio/graphics/1.png";
+import Graphic_2 from "Assets/portfolio/graphics/2.png";
+import Graphic_3 from "Assets/portfolio/graphics/3.png";
+import Graphic_4 from "Assets/portfolio/graphics/4.png";
+import Graphic_5 from "Assets/portfolio/graphics/5.png";
+// Skipping 6
+import Graphic_7 from "Assets/portfolio/graphics/7.png";
+import Graphic_8 from "Assets/portfolio/graphics/8.png";
+import Graphic_9 from "Assets/portfolio/graphics/9.png";
+import Graphic_10 from "Assets/portfolio/graphics/10.png";
+import Graphic_11 from "Assets/portfolio/graphics/11.png";
+import Graphic_12 from "Assets/portfolio/graphics/12.png";
+import Graphic_13 from "Assets/portfolio/graphics/13.png";
+import Graphic_14 from "Assets/portfolio/graphics/14.png";
+import Graphic_15 from "Assets/portfolio/graphics/15.png";
+import Graphic_16 from "Assets/portfolio/graphics/16.png";
+import Graphic_18 from "Assets/portfolio/graphics/18.png";
+import Graphic_19 from "Assets/portfolio/graphics/19.png";
+import Graphic_20 from "Assets/portfolio/graphics/20.png";
+import Graphic_21 from "Assets/portfolio/graphics/21.png";
 
 export default [
     {
@@ -28,7 +48,7 @@ export default [
         name: "Web Development",
         filter: "web",
         image: Work_3,
-        url: "https://startfinitynav.com/"
+        url: "https://startfinity-six.vercel.app/"
     },
     {
         name: "Web Development",
@@ -69,10 +89,32 @@ export default [
         url: "/"
     },
     {
-        name: "Graphics Design",
-        filter: "graphic",
-        image: Work_11,
-        url: "/"
-    },
+    name: "Graphics Design",
+    filter: "graphic",
+    image: Work_11,   // main card thumbnail
+    url: "/",
+    gallery: [
+  Graphic_1,
+  Graphic_2,
+  Graphic_3,
+  Graphic_4,
+  Graphic_5,
+  Graphic_7,
+  Graphic_8,
+  Graphic_9,
+  Graphic_10,
+  Graphic_11,
+  Graphic_12,
+  Graphic_13,
+  Graphic_14,
+  Graphic_15,
+  Graphic_16,
+  Graphic_18,
+  Graphic_19,
+  Graphic_20,
+  Graphic_21
+],
+
+  },
 
 ]
