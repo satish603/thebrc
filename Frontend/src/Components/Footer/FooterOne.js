@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MapIcon, EmailIcon, PhoneIcon, FacebookIcon, TwitterIcon, BehaceIcon , YoutubeIcon} from "Utilis/Icons";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 
 //Logo
@@ -63,43 +64,45 @@ const FooterOne = () => {
                     </Link>
                 </Box> */}
             </Stack>
-            <Stack direction="row" sx={styles.Social}>
+            <Stack direction="row" sx={styles.Social} spacing={1}>
                 <Link href="https://instagram.com/thebrchub">
-                    <a target="_blank">
-                        <ButtonBase>
-                            <InstagramIcon />
-                        </ButtonBase>
+                    <a target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <ButtonBase><InstagramIcon /></ButtonBase>
                     </a>
                 </Link>
-                {/* <Link href="https://github.com/thebrchub">
-                    <a target="_blank">
-                        <ButtonBase>
-                            <GitHubIcon />
-                        </ButtonBase>
-                    </a> */}
-                {/* </Link> */}
+
                 <Link href="https://www.facebook.com/thebrchub">
-                    <a target="_blank">
-                        <ButtonBase>
-                            <FacebookIcon />
-                        </ButtonBase>
+                    <a target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <ButtonBase><FacebookIcon /></ButtonBase>
                     </a>
                 </Link>
+
                 <Link href="https://twitter.com/thebrchub">
-                    <a target="_blank">
-                        <ButtonBase>
-                            <TwitterIcon />
-                        </ButtonBase>
+                    <a target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    <ButtonBase><TwitterIcon /></ButtonBase>
                     </a>
                 </Link>
-                <Link href="https://youtube.com/@TheBRCHub">
-                    <a target="_blank">
-                        <ButtonBase>
-                            <YoutubeIcon />
-                        </ButtonBase>
+
+                <Link href="https://www.linkedin.com/company/the-brc-hub/" >
+                    <a target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <ButtonBase><LinkedInIcon /></ButtonBase>
                     </a>
                 </Link>
-            </Stack>
+
+                <Link href="https://www.youtube.com/@TheBRCHub">
+                    <a target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <ButtonBase><YoutubeIcon /></ButtonBase>
+                    </a>
+                </Link>
+
+                {/* optional: GitHub */}
+                {/* <Link href="https://github.com/codestation21">
+                    <a target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <ButtonBase><GitHubIcon /></ButtonBase>
+                    </a>
+                </Link> */}
+                </Stack>
+
         </Box>
     );
 };
