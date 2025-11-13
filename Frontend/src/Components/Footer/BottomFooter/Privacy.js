@@ -11,7 +11,7 @@ const Privacy = ({ handleClose }) => {
                     sx={{ color: "text.primary" }}
                 >
                     <h1>Privacy Policy for Blazing Render Creation Hub LLP</h1>
-                    <p>At BRC HUB (Blazing Render Creation Hub LLP), accessible from <a href="https://thebrchub.com" target="_blank" rel="noreferrer">thebrchub.com</a>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and safeguard your information when you interact with our website or services.</p>
+                    <p>At BRC HUB (Blazing Render Creation Hub LLP), accessible from <a href="https://thebrchub.tech" target="_blank" rel="noreferrer">thebrchub.tech</a>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and safeguard your information when you interact with our website or services.</p>
 
                     <h2>1. Consent</h2>
                     <p>By using our website or services, you consent to the terms of this Privacy Policy and agree to our practices described herein.</p>
@@ -62,7 +62,7 @@ const Privacy = ({ handleClose }) => {
                     <ul>
                         <li>Email: <strong>contact@brchub.in</strong></li>
                         <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank" rel="noreferrer">instagram.com/thebrchub</a></li>
-                        <li>Website: <a href="https://thebrchub.com" target="_blank" rel="noreferrer">www.thebrchub.com</a></li>
+                        <li>Website: <a href="https://thebrchub.tech" target="_blank" rel="noreferrer">www.thebrchub.tech</a></li>
                     </ul>
                     <p><strong>Last updated:</strong> April 15, 2025</p>
                 </DialogContentText>

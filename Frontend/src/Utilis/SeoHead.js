@@ -6,7 +6,7 @@ const SeoHead = ({ title, description, keywords, image, url }) => {
   const defaultDescription = "Custom digital solutions built with React, Next.js, Node.js, and more. BRC HUB is your one-stop destination for modern app development.";
   const defaultKeywords = "Web development, Mobile apps, React, Next.js, BRC HUB, Blazing Render, India dev agency, full-stack services";
   const defaultImage = "/og-image.png"; // Replace with your real OG image path
-  const defaultUrl = "https://thebrchub.com";
+  const defaultUrl = "https://thebrchub.tech";
 
   return (
     <Head>

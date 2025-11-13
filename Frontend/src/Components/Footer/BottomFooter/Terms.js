@@ -58,7 +58,7 @@ const Terms = ({ handleClose }) => {
                                 <ul>
                                     <li>Email: <strong>connect.brchubllp@gmail.com</strong></li>
                                     <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank" rel="noreferrer">instagram.com/thebrchub</a></li>
-                                    <li>Website: <a href="https://thebrchub.com" target="_blank" rel="noreferrer">www.thebrchub.com</a></li>
+                                    <li>Website: <a href="https://thebrchub.tech" target="_blank" rel="noreferrer">www.thebrchub.tech</a></li>
                                 </ul>
                             </div>
                         </div>
