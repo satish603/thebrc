@@ -48,7 +48,7 @@ const services = [
   "Other"
 ];
 
-const API_URL = "https://mail-porter.vercel.app/api/email/send-email/privateemail";
+const API_URL = "https://mail-porter.vercel.app/api/email/send-email/gmail";
 const API_KEY = "SuperSecretApiKey123!@#";
 const BRAND   = "brchub";
 
