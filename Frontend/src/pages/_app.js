@@ -19,26 +19,62 @@ import '@fontsource/inter/800.css';
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  // Dynamic favicon switching based on system theme
+  React.useEffect(() => {
+    // Preload both favicons for instant switching
+    const preloadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+    };
+    preloadImage('/favicon-light.png');
+    preloadImage('/favicon-dark.png');
+
+    const updateFavicon = (isDark) => {
+      // Remove all existing favicons
+      const existingFavicons = document.querySelectorAll("link[rel='icon']");
+      existingFavicons.forEach(favicon => favicon.remove());
+
+      // LOGIC: Dark theme needs LIGHT logo, Light theme needs DARK logo
+      const faviconFile = isDark ? 'favicon-dark.png' : 'favicon-light.png';
+      
+      // Create new favicon (cache-busting removed for better caching)
+      const newFavicon = document.createElement('link');
+      newFavicon.rel = 'icon';
+      newFavicon.type = 'image/png';
+      newFavicon.href = `/${faviconFile}`;
+      
+      document.head.appendChild(newFavicon);
+      
+      console.log(`🎨 Theme: ${isDark ? 'DARK (using favicon-dark.png = WHITE logo)' : 'LIGHT (using favicon-light.png = DARK logo)'}`);
+      console.log(`📁 File loaded: ${faviconFile}`);
+    };
+
+    // Check initial theme
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    console.log('🌗 Initial system theme:', darkModeQuery.matches ? 'DARK' : 'LIGHT');
+    updateFavicon(darkModeQuery.matches);
+
+    // Listen for theme changes
+    const handler = (e) => {
+      console.log('🌓 Theme changed to:', e.matches ? 'DARK' : 'LIGHT');
+      updateFavicon(e.matches);
+    };
+    
+    darkModeQuery.addEventListener('change', handler);
+
+    return () => darkModeQuery.removeEventListener('change', handler);
+  }, []);
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
 
         {/* ========== FAVICONS (THEME AWARE) ========== */}
-        <link
-          rel="icon"
-          href="/favicon-light.png"
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          href="/favicon-dark.png"
-          media="(prefers-color-scheme: dark)"
-        />
-        {/* fallback */}
-        <link rel="icon" href="/favicon-light.png" />
+        {/* Initial favicon - will be replaced by useEffect */}
+        <link rel="icon" type="image/png" href="/favicon-light.png" />
 
-        {/* Apple icon */}
+        {/* Apple icon - use dark logo for visibility */}
         <link
           rel="apple-touch-icon"
           href="/logo-light.png"
@@ -86,7 +122,7 @@ export default function MyApp(props) {
             "@type": "Organization",
             name: "Blazing Render Creation Hub LLP",
             url: "https://thebrchub.tech",
-            logo: "https://thebrchub.tech/logo-dark.png", // dark version for white backgrounds
+            logo: "https://thebrchub.tech/logo-light.png", // ← FIXED: Use light logo (dark text) for white Google backgrounds
             sameAs: [
               "https://www.linkedin.com/company/thebrchub",
               "https://www.instagram.com/thebrchub",
