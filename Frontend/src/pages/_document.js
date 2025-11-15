@@ -9,8 +9,20 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Emotion insertion point */}
           <meta name="emotion-insertion-point" content="" />
-          <link rel="shortcut icon" href="/static/favicon.ico" />
+
+          {/* Light/Dark favicons (served from /public)
+              - favicon-light.png should be the dark-coloured logo (visible on light backgrounds)
+              - favicon-dark.png should be the light-coloured logo (visible on dark backgrounds)
+              Browsers that support prefers-color-scheme will pick the correct one.
+          */}
+          <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
+          <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+          {/* fallback */}
+          <link rel="shortcut icon" href="/favicon-light.png" />
+
+          {/* emotion SSR styles */}
           {this.props.emotionStyleTags}
         </Head>
         <body>

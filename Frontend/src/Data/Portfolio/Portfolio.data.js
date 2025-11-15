@@ -35,8 +35,14 @@ export default [
     {
         name: "Web Development",
         filter: "web",
+        image: Work_6,
+        url: "https://byxbytemedia.brchub.me/"
+    },
+    {
+        name: "Web Development",
+        filter: "web",
         image: Work_5,
-        url: "https://brew-and-bliss.vercel.app/"
+        url: "https://brewnbliss.brchub.me/"
     }, 
     {
         name: "Web Development",
@@ -48,26 +54,20 @@ export default [
         name: "Web Development",
         filter: "web",
         image: Work_3,
-        url: "https://startfinity-six.vercel.app/"
+        url: "https://startfinity.brchub.me/"
     },
     {
         name: "Web Development",
         filter: "web",
         image: Work_4,
-        url: "https://industrial-forge.vercel.app/"
+        url: "https://industrialforge.brchub.me/"
     },
     
     {
         name: "Web Development",
         filter: "web",
-        image: Work_6,
-        url: "https://byxbyte-media.vercel.app/"
-    },
-    {
-        name: "Web Development",
-        filter: "web",
         image: Work_7,
-        url: "https://luxe-property-website.vercel.app/"
+        url: "https://luxe.brchub.me/"
     },
     {
         name: "Web Development",

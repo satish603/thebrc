@@ -16,30 +16,52 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
 
-import { useEffect } from 'react'; // 🟣 kept (you can remove if unused)
-
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
-  // // 🛠️ Debug code to find overflowing elements
-  // useEffect(() => {
-  //   const all = document.querySelectorAll('*');
-  //   all.forEach((el) => {
-  //     if (el.scrollWidth > window.innerWidth) {
-  //       el.style.outline = '2px solid red'; // 🔴 Visually highlight
-  //       console.warn('🚨 Overflowing element found:', el);
-  //     }
-  //   });
-  // }, []);
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+        {/* ========== FAVICONS (THEME AWARE) ========== */}
+        <link
+          rel="icon"
+          href="/favicon-light.png"
+          media="(prefers-color-scheme: light)"
+        />
+        <link
+          rel="icon"
+          href="/favicon-dark.png"
+          media="(prefers-color-scheme: dark)"
+        />
+        {/* fallback */}
+        <link rel="icon" href="/favicon-light.png" />
+
+        {/* Apple icon */}
+        <link
+          rel="apple-touch-icon"
+          href="/logo-light.png"
+        />
+
+        {/* ========== SOCIAL META TAGS ========== */}
+        <meta
+          property="og:title"
+          content="Blazing Render Creation Hub LLP"
+        />
+        <meta
+          property="og:description"
+          content="A full-stack creative agency building sleek websites, apps, UI/UX, branding, animation & VFX."
+        />
+        <meta
+          property="og:image"
+          content="https://thebrchub.tech/og-image.png"
+        />
+        <meta property="og:url" content="https://thebrchub.tech" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      {/* Sitewide scripts (moved from _document.js) */}
-      {/* Google Tag (gtag) */}
+      {/* Google Tag */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-KH67ZDJMXC"
         strategy="afterInteractive"
@@ -53,7 +75,7 @@ export default function MyApp(props) {
         `}
       </Script>
 
-      {/* JSON-LD organization schema */}
+      {/* ========== ORGANIZATION JSON-LD (Google rich logo) ========== */}
       <Script
         id="organization-schema"
         type="application/ld+json"
@@ -62,9 +84,15 @@ export default function MyApp(props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "BRC Hub LLP",
+            name: "Blazing Render Creation Hub LLP",
             url: "https://thebrchub.tech",
-            logo: "https://thebrchub.tech/og-image.png",
+            logo: "https://thebrchub.tech/logo-dark.png", // dark version for white backgrounds
+            sameAs: [
+              "https://www.linkedin.com/company/thebrchub",
+              "https://www.instagram.com/thebrchub",
+              "https://www.facebook.com/thebrchub",
+              "https://www.youtube.com/@TheBRCHub",
+            ],
           }),
         }}
       />

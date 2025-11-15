@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemText,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
@@ -152,6 +153,7 @@ const Solution = () => {
     setEmail("");
     setMessage("");
     setErrors({});
+    setLoading(false);
   };
 
   const validateForm = () => {
@@ -239,197 +241,195 @@ const Solution = () => {
       </Grid>
 
       {/* Main Modal — cleaner UI */}
-<Modal open={open} onClose={handleClose}>
-  <Paper
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      p: { xs: 3, md: 5 },
-      width: { xs: "92%", sm: 720 },
-      bgcolor: "#fff",
-      borderRadius: "18px",
-      boxShadow: "0 20px 60px rgba(17, 63, 155, 0.45)",
-      color: "#0f172a",
-      outline: "none",
-    }}
-  >
-    {/* Close */}
-    <IconButton
-      onClick={handleClose}
-      aria-label="close"
-      sx={{
-        position: "absolute",
-        top: 12,
-        right: 12,
-        color: "rgba(15,23,42,0.6)",
-        background: "transparent",
-        "&:hover": { background: "rgba(15,23,42,0.04)" },
-      }}
-    >
-      <CloseIcon />
-    </IconButton>
-
-    {/* Title */}
-    <Typography
-      variant="h5"
-      sx={{
-        fontWeight: 800,
-        textAlign: "center",
-        color: "#111827",
-        mb: 1,
-        fontSize: { xs: "1.25rem", md: "1.6rem" },
-      }}
-    >
-      {selectedSolution?.title}
-    </Typography>
-
-    {/* Subtitle */}
-    <Typography
-      sx={{
-        textAlign: "center",
-        color: "rgba(15,23,42,0.7)",
-        fontSize: "0.95rem",
-        maxWidth: 900,
-        margin: "0 auto",
-        mb: 3,
-        lineHeight: 1.5,
-      }}
-    >
-      {selectedSolution?.popupDescription}
-    </Typography>
-
-    {/* If subCategories present -> show two nice cards */}
-    {selectedSolution?.subCategories ? (
-      <Grid
-        container
-        spacing={3}
-        sx={{
-          alignItems: "stretch",
-          justifyContent: "center",
-          px: { xs: 1, md: 2 },
-        }}
-      >
-        {selectedSolution.subCategories.map((sub) => (
-          <Grid item xs={12} sm={6} key={sub.key} sx={{ display: "flex" }}>
-            <Paper
-              onClick={() => handleOpenSubItem(sub)}
-              elevation={0}
-              sx={{
-                cursor: "pointer",
-                p: { xs: 3, md: 4 },
-                borderRadius: 12,
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                border: "1px solid rgba(15,23,42,0.06)",
-                background: "linear-gradient(180deg, #ffffff, #fbfbfd)",
-                transition: "transform 200ms ease, box-shadow 200ms ease",
-                boxShadow: "0 6px 20px rgba(2,6,23,0.06)",
-                "&:hover": {
-                  transform: "translateY(-6px)",
-                  boxShadow: "0 14px 40px rgba(2,6,23,0.08)",
-                },
-              }}
-            >
-              <Box>
-                <Typography
-                  sx={{
-                    fontWeight: 800,
-                    fontSize: { xs: "1rem", md: "1.05rem" },
-                    color: "#0f172a",
-                    mb: 1,
-                  }}
-                >
-                  {sub.title}
-                </Typography>
-                <Typography sx={{ color: "rgba(15,23,42,0.65)", fontSize: "0.95rem", lineHeight: 1.5 }}>
-                  {sub.popupDescription}
-                </Typography>
-              </Box>
-
-              {/* Accent / badge at bottom */}
-              <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-                <Box
-                  sx={{
-                    px: 3,
-                    py: "8px",
-                    borderRadius: "999px",
-                    fontWeight: 700,
-                    fontSize: "0.85rem",
-                    background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
-                    color: "#fff",
-                    boxShadow: "0 6px 18px rgba(123,44,191,0.18)",
-                    textAlign: "center",
-                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                    "&:hover": {
-                      transform: "translateY(-3px)",
-                      boxShadow: "0 10px 25px rgba(123,44,191,0.25)",
-                    },
-                  }}
-                >
-                  Explore
-                </Box>
-              </Box>
-
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    ) : (
-      /* fallback: original single-solution layout (unchanged content) */
-      <>
-        <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.8)", fontWeight: 400 }}>
-          {selectedSolution?.popupDescription}
-        </Typography>
-
-        <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.9)", fontWeight: 700 }}>
-          {selectedSolution?.popupaboutservices}
-        </Typography>
-
-        <List dense sx={{ mb: 2 }}>
-          {selectedSolution?.subServices?.map((sub, idx) => (
-            <ListItem key={idx} disablePadding sx={{ mb: 1 }}>
-              <ListItemText
-                primary={<Typography sx={{ color: "#0f172a", fontSize: "0.95rem" }}>✔️ {sub}</Typography>}
-              />
-            </ListItem>
-          ))}
-        </List>
-
-        <Box sx={{ mt: 2, textAlign: "center" }}>
-          <Box
-            onClick={() => {
-              if (selectedSolution.subServices && selectedSolution.subServices[0]) {
-                setSelectedSubService(selectedSolution.subServices[0]);
-              }
-              handleFormModalOpen();
-            }}
+      <Modal open={open} onClose={handleClose}>
+        <Paper
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            p: { xs: 3, md: 5 },
+            width: { xs: "92%", sm: 720 },
+            bgcolor: "#fff",
+            borderRadius: "18px",
+            boxShadow: "0 20px 60px rgba(17, 63, 155, 0.45)",
+            color: "#0f172a",
+            outline: "none",
+          }}
+        >
+          {/* Close */}
+          <IconButton
+            onClick={handleClose}
+            aria-label="close"
             sx={{
-              px: 4,
-              py: "10px",
-              borderRadius: "10px",
-              display: "inline-block",
-              background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
-              color: "#fff",
-              fontWeight: 700,
-              letterSpacing: 0.2,
-              cursor: "pointer",
-              boxShadow: "0 8px 30px rgba(92,56,154,0.12)",
-              transition: "transform 160ms ease",
-              "&:hover": { transform: "translateY(-3px)" },
+              position: "absolute",
+              top: 12,
+              right: 12,
+              color: "rgba(15,23,42,0.6)",
+              background: "transparent",
+              "&:hover": { background: "rgba(15,23,42,0.04)" },
             }}
           >
-            Get Started
-          </Box>
-        </Box>
-      </>
-    )}
-  </Paper>
-</Modal>
+            <CloseIcon />
+          </IconButton>
 
+          {/* Title */}
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 800,
+              textAlign: "center",
+              color: "#111827",
+              mb: 1,
+              fontSize: { xs: "1.25rem", md: "1.6rem" },
+            }}
+          >
+            {selectedSolution?.title}
+          </Typography>
+
+          {/* Subtitle */}
+          <Typography
+            sx={{
+              textAlign: "center",
+              color: "rgba(15,23,42,0.7)",
+              fontSize: "0.95rem",
+              maxWidth: 900,
+              margin: "0 auto",
+              mb: 3,
+              lineHeight: 1.5,
+            }}
+          >
+            {selectedSolution?.popupDescription}
+          </Typography>
+
+          {/* If subCategories present -> show two nice cards */}
+          {selectedSolution?.subCategories ? (
+            <Grid
+              container
+              spacing={3}
+              sx={{
+                alignItems: "stretch",
+                justifyContent: "center",
+                px: { xs: 1, md: 2 },
+              }}
+            >
+              {selectedSolution.subCategories.map((sub) => (
+                <Grid item xs={12} sm={6} key={sub.key} sx={{ display: "flex" }}>
+                  <Paper
+                    onClick={() => handleOpenSubItem(sub)}
+                    elevation={0}
+                    sx={{
+                      cursor: "pointer",
+                      p: { xs: 3, md: 4 },
+                      borderRadius: 12,
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      border: "1px solid rgba(15,23,42,0.06)",
+                      background: "linear-gradient(180deg, #ffffff, #fbfbfd)",
+                      transition: "transform 200ms ease, box-shadow 200ms ease",
+                      boxShadow: "0 6px 20px rgba(2,6,23,0.06)",
+                      "&:hover": {
+                        transform: "translateY(-6px)",
+                        boxShadow: "0 14px 40px rgba(2,6,23,0.08)",
+                      },
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontWeight: 800,
+                          fontSize: { xs: "1rem", md: "1.05rem" },
+                          color: "#0f172a",
+                          mb: 1,
+                        }}
+                      >
+                        {sub.title}
+                      </Typography>
+                      <Typography sx={{ color: "rgba(15,23,42,0.65)", fontSize: "0.95rem", lineHeight: 1.5 }}>
+                        {sub.popupDescription}
+                      </Typography>
+                    </Box>
+
+                    {/* Accent / badge at bottom */}
+                    <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
+                      <Box
+                        sx={{
+                          px: 3,
+                          py: "8px",
+                          borderRadius: "999px",
+                          fontWeight: 700,
+                          fontSize: "0.85rem",
+                          background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
+                          color: "#fff",
+                          boxShadow: "0 6px 18px rgba(123,44,191,0.18)",
+                          textAlign: "center",
+                          transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                          "&:hover": {
+                            transform: "translateY(-3px)",
+                            boxShadow: "0 10px 25px rgba(123,44,191,0.25)",
+                          },
+                        }}
+                      >
+                        Explore
+                      </Box>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            /* fallback: original single-solution layout (unchanged content) */
+            <>
+              <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.8)", fontWeight: 400 }}>
+                {selectedSolution?.popupDescription}
+              </Typography>
+
+              <Typography sx={{ mb: 2, color: "rgba(15,23,42,0.9)", fontWeight: 700 }}>
+                {selectedSolution?.popupaboutservices}
+              </Typography>
+
+              <List dense sx={{ mb: 2 }}>
+                {selectedSolution?.subServices?.map((sub, idx) => (
+                  <ListItem key={idx} disablePadding sx={{ mb: 1 }}>
+                    <ListItemText
+                      primary={<Typography sx={{ color: "#0f172a", fontSize: "0.95rem" }}>✔️ {sub}</Typography>}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+
+              <Box sx={{ mt: 2, textAlign: "center" }}>
+                <Box
+                  onClick={() => {
+                    if (selectedSolution.subServices && selectedSolution.subServices[0]) {
+                      setSelectedSubService(selectedSolution.subServices[0]);
+                    }
+                    handleFormModalOpen();
+                  }}
+                  sx={{
+                    px: 4,
+                    py: "10px",
+                    borderRadius: "10px",
+                    display: "inline-block",
+                    background: "linear-gradient(90deg,#7b2cbf,#4c1d95)",
+                    color: "#fff",
+                    fontWeight: 700,
+                    letterSpacing: 0.2,
+                    cursor: "pointer",
+                    boxShadow: "0 8px 30px rgba(92,56,154,0.12)",
+                    transition: "transform 160ms ease",
+                    "&:hover": { transform: "translateY(-3px)" },
+                  }}
+                >
+                  Get Started
+                </Box>
+              </Box>
+            </>
+          )}
+        </Paper>
+      </Modal>
 
       {/* Sub-item Description Modal (for subCategories like Web / App when the main card had multiple choices) */}
       <Modal open={subDescOpen} onClose={handleCloseSubDesc}>
@@ -449,10 +449,7 @@ const Solution = () => {
             animation: "fadeIn 0.3s ease-in-out",
           }}
         >
-          <IconButton
-            onClick={handleCloseSubDesc}
-            sx={{ position: "absolute", top: 8, right: 8, color: "#888" }}
-          >
+          <IconButton onClick={handleCloseSubDesc} sx={{ position: "absolute", top: 8, right: 8, color: "#888" }}>
             <CloseIcon />
           </IconButton>
 
@@ -472,9 +469,7 @@ const Solution = () => {
                 {selectedSubItem.title}
               </Typography>
 
-              <Typography sx={{ mb: 2, color: "black", fontWeight: 300 }}>
-                {selectedSubItem.popupDescription}
-              </Typography>
+              <Typography sx={{ mb: 2, color: "black", fontWeight: 300 }}>{selectedSubItem.popupDescription}</Typography>
 
               <Typography sx={{ mb: 2, color: "black", fontWeight: 700 }}>
                 {selectedSubItem.popupaboutservices || "Our services include:"}
@@ -545,10 +540,7 @@ const Solution = () => {
             outline: "none",
           }}
         >
-          <IconButton
-            onClick={handleFormModalClose}
-            sx={{ position: "absolute", top: 8, left: 8, color: "#888" }}
-          >
+          <IconButton onClick={handleFormModalClose} sx={{ position: "absolute", top: 8, left: 8, color: "#888" }}>
             <ArrowBackIcon />
           </IconButton>
 
@@ -559,9 +551,10 @@ const Solution = () => {
           <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <input
               placeholder="Name"
-              style={inputStyle}
+              style={{ ...inputStyle, background: loading ? "#f5f5f5" : undefined }}
               value={name}
               onChange={(e) => setName(e.target.value)}
+              disabled={loading}
             />
             {errors.name && <div style={errorTextStyle}>{errors.name}</div>}
 
@@ -576,23 +569,26 @@ const Solution = () => {
                   setMobile(value);
                 }
               }}
-              style={inputStyle}
+              style={{ ...inputStyle, background: loading ? "#f5f5f5" : undefined }}
+              disabled={loading}
             />
             {errors.mobile && <div style={errorTextStyle}>{errors.mobile}</div>}
 
             <input
               type="email"
               placeholder="Email"
-              style={inputStyle}
+              style={{ ...inputStyle, background: loading ? "#f5f5f5" : undefined }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
             />
             {errors.email && <div style={errorTextStyle}>{errors.email}</div>}
 
             <select
               value={selectedSubService}
               onChange={(e) => setSelectedSubService(e.target.value)}
-              style={{ ...inputStyle, cursor: "pointer" }}
+              style={{ ...inputStyle, cursor: "pointer", background: loading ? "#f5f5f5" : undefined }}
+              disabled={loading}
             >
               <option value="">Select Service</option>
               {getCurrentSubServices().map((sub, i) => (
@@ -608,11 +604,16 @@ const Solution = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Message"
-              style={{ ...inputStyle, resize: "none" }}
+              style={{ ...inputStyle, resize: "none", background: loading ? "#f5f5f5" : undefined }}
+              disabled={loading}
             />
 
             <Box
-              onClick={handleFormSubmit}
+              onClick={() => {
+                if (!loading) handleFormSubmit();
+              }}
+              role="button"
+              aria-disabled={loading}
               sx={{
                 mt: 1,
                 textAlign: "center",
@@ -624,15 +625,28 @@ const Solution = () => {
                 color: "white",
                 py: 1,
                 borderRadius: "10px",
-                cursor: "pointer",
+                cursor: loading ? "default" : "pointer",
                 fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                justifyContent: "center",
+                pointerEvents: loading ? "none" : "auto",
+                opacity: loading ? 0.85 : 1,
                 "&:hover": {
-                  boxShadow: "0 0 15px rgba(121, 40, 202, 0.7)",
-                  transform: "scale(1.03)",
+                  boxShadow: loading ? "none" : "0 0 15px rgba(121, 40, 202, 0.7)",
+                  transform: loading ? "none" : "scale(1.03)",
                 },
               }}
             >
-              Submit
+              {loading ? (
+                <>
+                  <CircularProgress size={18} thickness={5} sx={{ color: "white" }} />
+                  <Typography sx={{ fontSize: "0.95rem", fontWeight: 700 }}>Submitting...</Typography>
+                </>
+              ) : (
+                <Typography sx={{ fontSize: "0.95rem", fontWeight: 700 }}>Submit</Typography>
+              )}
             </Box>
           </Box>
         </Paper>
@@ -655,11 +669,9 @@ const Solution = () => {
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-            🎉 Query Submitted!
+            Query Submitted!
           </Typography>
-          <Typography sx={{ fontSize: "0.95rem", color: "gray" }}>
-            We&apos;ll get back to you soon!
-          </Typography>
+          <Typography sx={{ fontSize: "0.95rem", color: "gray" }}>We&apos;ll get back to you soon!</Typography>
         </Paper>
       </Modal>
 
