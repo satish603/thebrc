@@ -36,24 +36,10 @@ const Heads = () => {
       <meta name="twitter:description" content="Creative tech studio delivering apps, websites, VFX and UI design." />
       <meta name="twitter:image" content="https://thebrchub.tech/og-image.png" />
 
-      {/* ← NEW — AUTO FAVICON SWITCHING */}
-      <link
-        rel="icon"
-        href="/favicon-light.png"
-        media="(prefers-color-scheme: light)"
-      />
-      <link
-        rel="icon"
-        href="/favicon-dark.png"
-        media="(prefers-color-scheme: dark)"
-      />
-      {/* fallback */}
-      <link rel="icon" href="/favicon-light.png" />
-
       {/* THEME COLOR */}
       <meta name="theme-color" content="#2cb1ff" />
 
-      {/* SCHEMA */}
+      {/* SCHEMA - FIXED: Use light logo for Google Search */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -63,7 +49,7 @@ const Heads = () => {
             "@type": "Organization",
             "name": "Blazing Render Creation Hub LLP",
             "url": "https://www.thebrchub.tech",
-            "logo": "https://thebrchub.tech/og-image.png",
+            "logo": "https://thebrchub.tech/logo-light.png",
             "sameAs": [
               "https://www.instagram.com/thebrchub",
               "https://twitter.com/thebrchub",
