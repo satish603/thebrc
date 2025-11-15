@@ -121,15 +121,22 @@ export default function MyApp(props) {
             "@context": "https://schema.org",
             "@type": "Organization",
             name: "Blazing Render Creation Hub LLP",
-            url: "https://thebrchub.tech",
-            logo: "https://thebrchub.tech/logo-light.png", // ← FIXED: Use light logo (dark text) for white Google backgrounds
+            alternateName: "BRC Hub",
+            url: "https://www.thebrchub.tech",
+            logo: "https://www.thebrchub.tech/logo-light.png",
+            description: "A full-stack creative agency offering sleek websites, apps, UI/UX, branding, animation & VFX. Powered by React, Next.js, Node, Flutter & more.",
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "customer service",
+              url: "https://www.thebrchub.tech"
+            },
             sameAs: [
               "https://www.linkedin.com/company/thebrchub",
               "https://www.instagram.com/thebrchub",
               "https://www.facebook.com/thebrchub",
-              "https://www.youtube.com/@TheBRCHub",
-            ],
-          }),
+              "https://www.youtube.com/@TheBRCHub"
+            ]
+          })
         }}
       />
 
