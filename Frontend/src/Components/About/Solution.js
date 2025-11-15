@@ -193,7 +193,7 @@ const Solution = () => {
 
     try {
       const response = await fetch(
-        "https://mail-porter.vercel.app/api/email/send-email/privateemail",
+        "https://mail-porter.vercel.app/api/email/send-email/gmail",
         {
           method: "POST",
           headers: {
