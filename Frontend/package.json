@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.17.1",
     "@mui/lab": "^5.0.0-alpha.64",
     "@mui/material": "^5.17.1",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^6.0.2",
     "framer-motion": "^6.5.1",
     "imagemin-mozjpeg": "^9.0.0",

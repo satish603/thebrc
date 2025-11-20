@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import {
   Box,
   Grid,
@@ -53,8 +53,8 @@ const API_KEY = "SuperSecretApiKey123!@#";
 const BRAND   = "brchub";
 
 const Form = () => {
-  // react-hook-form with defaults
   const {
+    control,            // <-- added control for Controller
     register,
     handleSubmit,
     formState: { errors },
@@ -69,21 +69,19 @@ const Form = () => {
     }
   });
 
-  // form control states
-  const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(''); // shows API success/error only
+  const [loading, setLoading]               = useState(false);
+  const [statusMessage, setStatusMessage]   = useState('');
   const [selectedService, setSelectedService] = useState('');
-  const [userMessage, setUserMessage] = useState(watch('message') || 'Please add a message or select a service.');
+  const [userMessage, setUserMessage]       = useState(watch('message') || 'Please add a message or select a service.');
 
-  // sync react-hook-form message when userMessage changes
+  // keep react-hook-form's message value in sync with userMessage
   useEffect(() => {
     setValue('message', userMessage);
   }, [userMessage, setValue]);
 
-  // when service changes, prefill userMessage but keep it editable
   useEffect(() => {
     if (selectedService === "Other") {
-      setUserMessage(''); // blank for custom message
+      setUserMessage('');
       setValue('message', '');
     } else if (!selectedService) {
       const defaultMsg = 'Please add a message or select a service.';
@@ -96,20 +94,17 @@ const Form = () => {
     }
   }, [selectedService, setValue]);
 
-  // AUTO-HIDE: clear statusMessage after a few seconds
+  // auto-hide status message
   useEffect(() => {
     if (!statusMessage) return;
-    const t = setTimeout(() => {
-      setStatusMessage('');
-    }, 4500); // 4.5 seconds — adjust if you want shorter/longer
-
+    const t = setTimeout(() => setStatusMessage(''), 4500);
     return () => clearTimeout(t);
   }, [statusMessage]);
 
   const onSubmit = async (data) => {
     setLoading(true);
     setStatusMessage('');
-    // Use the form values (countryCode + phone)
+
     const payload = {
       name: data.name,
       email: data.email,
@@ -130,8 +125,6 @@ const Form = () => {
 
       if (response.ok) {
         setStatusMessage("Email received! We will contact you soon.");
-        setLoading(false);
-        // reset form but keep default country code and default message
         reset({
           countryCode: "+91",
           message: "Please add a message or select a service.",
@@ -145,39 +138,27 @@ const Form = () => {
       } else {
         console.error("API error:", await response.text());
         setStatusMessage("Something went wrong. Try again!");
-        setLoading(false);
       }
     } catch (err) {
       console.error("Network error:", err);
       setStatusMessage("Something went wrong. Try again!");
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Box
-      sx={{ mt: "3em" }}
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <Box sx={{ mt: "3em" }} component="form" onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         {/* Full Name */}
         <Grid item md={6} xs={12}>
           <InputBase
             placeholder="Your Full Name"
-            endAdornment={
-              <InputAdornment position="end">
-                <PersonOutlineOutlinedIcon />
-              </InputAdornment>
-            }
+            endAdornment={<InputAdornment position="end"><PersonOutlineOutlinedIcon /></InputAdornment>}
             sx={styles.InputField}
             {...register('name', { required: 'Please enter your name!' })}
           />
-          {errors.name && (
-            <Typography sx={styles.ErrorMessage}>
-              <ErrorIcon /> {errors.name.message}
-            </Typography>
-          )}
+          {errors.name && (<Typography sx={styles.ErrorMessage}><ErrorIcon /> {errors.name.message}</Typography>)}
         </Grid>
 
         {/* Phone Number */}
@@ -197,11 +178,7 @@ const Form = () => {
             />
             <InputBase
               placeholder="Phone Number"
-              endAdornment={
-                <InputAdornment position="end">
-                  <PhoneIphoneIcon />
-                </InputAdornment>
-              }
+              endAdornment={<InputAdornment position="end"><PhoneIphoneIcon /></InputAdornment>}
               sx={{ ...styles.InputField, flexGrow: 1 }}
               {...register('phone', {
                 required: 'Enter your phone number!',
@@ -223,11 +200,7 @@ const Form = () => {
         <Grid item md={6} xs={12}>
           <InputBase
             placeholder="Email Address"
-            endAdornment={
-              <InputAdornment position="end">
-                <MailOutlineIcon />
-              </InputAdornment>
-            }
+            endAdornment={<InputAdornment position="end"><MailOutlineIcon /></InputAdornment>}
             sx={styles.InputField}
             {...register('email', {
               required: 'Please enter an email address!',
@@ -237,11 +210,7 @@ const Form = () => {
               }
             })}
           />
-          {errors.email && (
-            <Typography sx={styles.ErrorMessage}>
-              <ErrorIcon /> {errors.email.message}
-            </Typography>
-          )}
+          {errors.email && (<Typography sx={styles.ErrorMessage}><ErrorIcon /> {errors.email.message}</Typography>)}
         </Grid>
 
         {/* Service Dropdown */}
@@ -259,41 +228,45 @@ const Form = () => {
             onChange={(e) => setSelectedService(e.target.value)}
           >
             <option value="">-- Select a Service --</option>
-            {services.map((svc, i) => (
-              <option key={i} value={svc}>{svc}</option>
-            ))}
+            {services.map((svc, i) => (<option key={i} value={svc}>{svc}</option>))}
           </select>
-          {errors.service && (
-            <Typography sx={styles.ErrorMessage}>
-              <ErrorIcon /> {errors.service.message}
-            </Typography>
-          )}
+          {errors.service && (<Typography sx={styles.ErrorMessage}><ErrorIcon /> {errors.service.message}</Typography>)}
         </Grid>
 
-        {/* Message */}
+        {/* Message (fixed) */}
         <Grid item md={6} xs={12}>
-          <InputBase
-            placeholder="Please add a message or select a service"
-            multiline
-            minRows={2}
-            maxRows={5}
-            sx={styles.MessageFiled}
-            value={userMessage}
-            onChange={(e) => {
-              setUserMessage(e.target.value);
-              setValue('message', e.target.value);
-            }}
-            {...register('message', {
+          <Controller
+            name="message"
+            control={control}
+            rules={{
               required: 'Please add a message or select a service',
               minLength: { value: 25, message: 'Message should be at least 25 characters!' },
               maxLength: { value: 1000, message: 'Message should not exceed 1000 characters!' }
-            })}
+            }}
+            render={({ field }) => (
+              <InputBase
+                {...field}
+                placeholder="Please add a message or select a service"
+                multiline
+                minRows={2}
+                maxRows={5}
+                sx={{
+                  ...styles.MessageFiled,
+                  // ensure text is visible — force color to theme text primary
+                  color: (theme) => theme.palette.text.primary,
+                  // make input text rendering explicit
+                  '& .MuiInputBase-input': { color: (theme) => theme.palette.text.primary }
+                }}
+                value={userMessage}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setUserMessage(v);    // update local state (keeps pre-fill behavior)
+                  field.onChange(v);    // update react-hook-form
+                }}
+              />
+            )}
           />
-          {errors.message && (
-            <Typography sx={styles.ErrorMessage}>
-              <ErrorIcon /> {errors.message.message}
-            </Typography>
-          )}
+          {errors.message && (<Typography sx={styles.ErrorMessage}><ErrorIcon /> {errors.message.message}</Typography>)}
         </Grid>
 
         {/* Submit Button */}
@@ -313,7 +286,6 @@ const Form = () => {
               )}
             </ButtonBase>
 
-            {/* Show only API status (success/error). This prevents the form message from appearing here. */}
             <Typography
               variant="body1"
               component="p"
