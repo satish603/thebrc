@@ -41,10 +41,10 @@ const FooterOne = () => {
                     <EmailIcon />
                 </Box>
                 <Box>
-                    <Link href="mailto:connect.brchubllp@gmail.cpm.com">
+                    <Link href="mailto:info@thebrchub.tech">
                         <a>
                             <Typography variant="body1" component="p">
-                                connect.brchubllp@gmail.com
+                                info@thebrchub.tech
                             </Typography>
                         </a>
                     </Link>

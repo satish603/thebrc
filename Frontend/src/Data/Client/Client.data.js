@@ -1,40 +1,47 @@
 import Client from "Assets/review/client-1.png";
 
 export default [
+    // -------------------------
+    // REAL CLIENT TESTIMONIALS
+    // -------------------------
+
     {
-        title: "Amazing Design Work",
-        name: "VisionEdge Studios",
+        title: "Cinematic 3D Animation Output",
+        name: "Prashanth Naidu - Film Maker",
         star: 5,
-        review: "Blazing Render absolutely nailed our animation needs! The designs were top-notch and delivered on time.",
-        avatar: Client
-    },
-    {  
-         title: "Highly Professional Team",
-        name: "Nexora Innovations",
-        star: 5,
-        review: "They understood our requirements clearly and executed the project with great professionalism and creativity.",
+        review: "The 3D animated video they delivered was visually stunning and perfectly matched my film's concept. Smooth workflow and zero delays.",
         avatar: Client
     },
 
-    {   
-        title: "Impressive Web Development",
-        name: "ByteCraft Solutions",
+    {
+        title: "Smooth & Professional Website Delivery",
+        name: "LVCLegalvala Consultancy LLP",
         star: 5,
-        review: "Loved the way they built our website — sleek, responsive, and blazing fast! Will surely work with them again.",
+        review: "They built a clean, modern consultancy website for us exactly as requested. Great communication and highly reliable team.",
         avatar: Client
     },
+
     {
-        title: "Top-Notch VFX Delivery",
-        name: "DreamSpark Studios",
+        title: "Perfect Website for Our Ad Agency",
+        name: "Byxbyte Media",
         star: 5,
-        review: "Super impressed with their VFX skills. The output looked like something straight out of a movie!",
+        review: "Loved the website created for our agency—sleek, bold, and aligned with our brand. Quick turnaround and very cooperative team.",
         avatar: Client
     },
+
     {
-        title: "Great Collaboration Experience",
-        name: "GlideTech Creations",
+        title: "Great Partner for Marketing Website",
+        name: "Digivala",
         star: 5,
-        review: "Friendly and talented team. They were very open to feedback and quick with iterations. Awesome experience!",
+        review: "They understood our marketing vibe and delivered a fast, engaging website. Smooth revisions and super professional throughout.",
+        avatar: Client
+    },
+
+    {
+        title: "Reliable Tech Partner for SaaS & Website",
+        name: "Orvexa Softech Private Limited",
+        star: 5,
+        review: "They’re building our HRMS SaaS and also delivered a clean corporate website. Strong tech understanding and always on time with updates.",
         avatar: Client
     }
-]
+];

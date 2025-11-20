@@ -67,10 +67,10 @@ const Drawers = ({ toggleDrawer }) => {
                     <EmailIcon />
                 </Box>
                 <Box>
-                    <Link href="mailto:info@codestation21.com">
+                    <Link href="mailto:info@thebrchub.tech">
                         <a>
                             <Typography variant="body1" component="p">
-                                connect.brchubllp@gmail.com
+                                info@thebrchub.tech
                             </Typography>
                         </a>
                     </Link>

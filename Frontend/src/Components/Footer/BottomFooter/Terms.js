@@ -56,7 +56,7 @@ const Terms = ({ handleClose }) => {
                                 <h2>11. Contact Us</h2>
                                 <p>If you have any questions about these Terms and Conditions, you can reach us at:</p>
                                 <ul>
-                                    <li>Email: <strong>connect.brchubllp@gmail.com</strong></li>
+                                    <li>Email: <strong>info@thebrchub.tech</strong></li>
                                     <li>Instagram: <a href="https://instagram.com/thebrchub" target="_blank" rel="noreferrer">instagram.com/thebrchub</a></li>
                                     <li>Website: <a href="https://thebrchub.tech" target="_blank" rel="noreferrer">www.thebrchub.tech</a></li>
                                 </ul>

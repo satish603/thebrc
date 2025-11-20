@@ -2,12 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography, Modal, IconButton } from "@mui/material";
 import Link from "next/link";
 
-// Moving marquee component — repeated images, two rows, opposite directions.
-// props:
-// - images: array of image src
-// - height: px height of each card (default 140)
-// - gap: px gap between cards (default 12)
-// - speed: duration in seconds to complete a loop (default 28)
+
 function MovingMarquee({ images = [], height = 140, gap = 12, speed = 28 }) {
   const [pool, setPool] = useState([]);
 
@@ -19,8 +14,7 @@ function MovingMarquee({ images = [], height = 140, gap = 12, speed = 28 }) {
 
   const estimatedMinWidth = Math.round(height * 0.95);
 
-  // Create enough copies to fill at least 3x the viewport width
-  // This ensures smooth scrolling on any screen size
+
   const copies = 10; // Make 10 copies of all 19 images
   
   const topArray = [];
@@ -198,9 +192,6 @@ function MovingMarquee({ images = [], height = 140, gap = 12, speed = 28 }) {
   );
 }
 
-/**
- * Work - 3D Rotating Carousel with Stack Effect
- */
 const Work = ({ works = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -413,7 +404,7 @@ const Work = ({ works = [] }) => {
           <Box sx={{ position: "relative", zIndex: 3, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", textAlign: "center", minHeight: 300, p: { xs: 3, sm: 5 } }}>
             <Typography sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, fontWeight: 800, mb: 1, color: "#0a0a0a" }}>Launching Soon</Typography>
             <Typography sx={{ fontSize: "1rem", color: "rgba(0,0,0,0.8)", lineHeight: 1.6, maxWidth: 480, mb: 2 }}>Our upcoming mobile app is in final stages of development — lightweight, fast and built with love. Stay tuned for something incredible!</Typography>
-            <Typography sx={{ color: "rgba(0,0,0,0.6)", fontSize: "0.9rem", maxWidth: 460 }}>Want a demo or a private preview for your team? Drop us an email at connect.brchubllp@gmail.com</Typography>
+            <Typography sx={{ color: "rgba(0,0,0,0.6)", fontSize: "0.9rem", maxWidth: 460 }}>Want a demo or a private preview for your team? Drop us an email at info@thebrchub.tech</Typography>
           </Box>
 
           <style jsx="true">{`

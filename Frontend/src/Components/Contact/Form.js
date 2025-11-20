@@ -53,38 +53,63 @@ const API_KEY = "SuperSecretApiKey123!@#";
 const BRAND   = "brchub";
 
 const Form = () => {
-  const [loading, setLoading]               = useState(false);
-  const [message, setMessage]               = useState('');
-  const [success, setSuccess]               = useState(false);
-  const [selectedService, setSelectedService] = useState('');
-  const [isCustomMessage, setIsCustomMessage] = useState(false);
-
+  // react-hook-form with defaults
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue
-  } = useForm();
+    setValue,
+    watch
+  } = useForm({
+    defaultValues: {
+      countryCode: "+91",
+      message: "Please add a message or select a service.",
+      service: ""
+    }
+  });
 
+  // form control states
+  const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(''); // shows API success/error only
+  const [selectedService, setSelectedService] = useState('');
+  const [userMessage, setUserMessage] = useState(watch('message') || 'Please add a message or select a service.');
+
+  // sync react-hook-form message when userMessage changes
+  useEffect(() => {
+    setValue('message', userMessage);
+  }, [userMessage, setValue]);
+
+  // when service changes, prefill userMessage but keep it editable
   useEffect(() => {
     if (selectedService === "Other") {
-      setIsCustomMessage(true);
+      setUserMessage(''); // blank for custom message
       setValue('message', '');
     } else if (!selectedService) {
-      setIsCustomMessage(false);
-      setValue('message', 'Please add a message or select a service.');
+      const defaultMsg = 'Please add a message or select a service.';
+      setUserMessage(defaultMsg);
+      setValue('message', defaultMsg);
     } else {
-      setIsCustomMessage(false);
-      setValue('message', `I need info related to ${selectedService} service.`);
+      const svcMsg = `I need info related to ${selectedService} service.`;
+      setUserMessage(svcMsg);
+      setValue('message', svcMsg);
     }
   }, [selectedService, setValue]);
 
+  // AUTO-HIDE: clear statusMessage after a few seconds
+  useEffect(() => {
+    if (!statusMessage) return;
+    const t = setTimeout(() => {
+      setStatusMessage('');
+    }, 4500); // 4.5 seconds — adjust if you want shorter/longer
+
+    return () => clearTimeout(t);
+  }, [statusMessage]);
+
   const onSubmit = async (data) => {
     setLoading(true);
-    setMessage('');
-    setSuccess(false);
-
+    setStatusMessage('');
+    // Use the form values (countryCode + phone)
     const payload = {
       name: data.name,
       email: data.email,
@@ -104,21 +129,27 @@ const Form = () => {
       });
 
       if (response.ok) {
-        setSuccess(true);
-        setMessage("Email received! We will contact you soon.");
-        reset();
+        setStatusMessage("Email received! We will contact you soon.");
+        setLoading(false);
+        // reset form but keep default country code and default message
+        reset({
+          countryCode: "+91",
+          message: "Please add a message or select a service.",
+          name: "",
+          email: "",
+          phone: "",
+          service: ""
+        });
         setSelectedService("");
-        setIsCustomMessage(false);
+        setUserMessage("Please add a message or select a service.");
       } else {
         console.error("API error:", await response.text());
-        setSuccess(false);
-        setMessage("Something went wrong. Try again!");
+        setStatusMessage("Something went wrong. Try again!");
+        setLoading(false);
       }
     } catch (err) {
       console.error("Network error:", err);
-      setSuccess(false);
-      setMessage("Something went wrong. Try again!");
-    } finally {
+      setStatusMessage("Something went wrong. Try again!");
       setLoading(false);
     }
   };
@@ -140,11 +171,11 @@ const Form = () => {
               </InputAdornment>
             }
             sx={styles.InputField}
-            {...register('name', { required: true })}
+            {...register('name', { required: 'Please enter your name!' })}
           />
           {errors.name && (
             <Typography sx={styles.ErrorMessage}>
-              <ErrorIcon /> Please enter your name!
+              <ErrorIcon /> {errors.name.message}
             </Typography>
           )}
         </Grid>
@@ -154,7 +185,8 @@ const Form = () => {
           <Box sx={{ display: 'flex', gap: 1 }}>
             <InputBase
               placeholder="+91"
-              sx={{ ...styles.InputField, width: "100px" }}
+              defaultValue="+91"
+              sx={{ ...styles.InputField, width: "100px", fontWeight: 600 }}
               {...register('countryCode', {
                 required: 'Enter country code!',
                 pattern: {
@@ -174,8 +206,8 @@ const Form = () => {
               {...register('phone', {
                 required: 'Enter your phone number!',
                 pattern: {
-                  value: /^[0-9]{10}$/,
-                  message: 'Enter a valid 10-digit number!',
+                  value: /^[0-9]{7,15}$/,
+                  message: 'Enter a valid phone number!',
                 },
               })}
             />
@@ -246,12 +278,16 @@ const Form = () => {
             minRows={2}
             maxRows={5}
             sx={styles.MessageFiled}
+            value={userMessage}
+            onChange={(e) => {
+              setUserMessage(e.target.value);
+              setValue('message', e.target.value);
+            }}
             {...register('message', {
               required: 'Please add a message or select a service',
               minLength: { value: 25, message: 'Message should be at least 25 characters!' },
               maxLength: { value: 1000, message: 'Message should not exceed 1000 characters!' }
             })}
-            disabled={!isCustomMessage && selectedService !== "Other"}
           />
           {errors.message && (
             <Typography sx={styles.ErrorMessage}>
@@ -267,30 +303,27 @@ const Form = () => {
               type="submit"
               sx={{
                 ...styles.SubmitButton,
-                backgroundColor: success ? "primary.success" : "primary.main"
+                backgroundColor: statusMessage.startsWith('Email received') ? "primary.success" : "primary.main"
               }}
             >
-              {!loading && !message && (
+              {loading ? (
+                <CircularProgress size={22} sx={{ color: "background.default" }} />
+              ) : (
                 <>Send Message <ArrowForwardTwoToneIcon /></>
               )}
-              {loading && (
-                <CircularProgress size={22} sx={{ color: "background.default" }} />
-              )}
-              {message && !loading && (
-                success
-                  ? <DoneIcon sx={{ fontSize: 35 }} />
-                  : <CloseIcon sx={{ fontSize: 35 }} />
-              )}
             </ButtonBase>
+
+            {/* Show only API status (success/error). This prevents the form message from appearing here. */}
             <Typography
               variant="body1"
               component="p"
               sx={{
                 ...styles.SendText,
-                color: success ? "primary.success" : "primary.main"
+                color: statusMessage.startsWith('Email received') ? "primary.success" : "primary.main",
+                marginTop: "0.8rem"
               }}
             >
-              {message}
+              {statusMessage}
             </Typography>
           </Box>
         </Grid>
