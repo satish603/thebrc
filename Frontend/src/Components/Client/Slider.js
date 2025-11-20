@@ -84,7 +84,19 @@ const Sliders = () => {
                       {client.review}
                     </Typography>
                   </Box>
-                  <ButtonBase sx={styles.Name}>{client.name}</ButtonBase>
+                 <ButtonBase
+  component={client.link ? "a" : "div"}
+  href={client.link || undefined}
+  target={client.link ? "_blank" : undefined}
+  rel={client.link ? "noopener noreferrer" : undefined}
+  sx={{
+    ...styles.Name,
+    cursor: client.link ? "pointer" : "default",
+  }}
+>
+  {client.name}
+</ButtonBase>
+
                 </Box>
               ))}
           </Box>
