@@ -115,11 +115,11 @@ const Drawers = ({ toggleDrawer }) => {
                     </a>
                 </Link>
 
-                <Link href="https://www.youtube.com/@TheBRCHub">
+                {/* <Link href="https://www.youtube.com/@TheBRCHub">
                     <a target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                     <ButtonBase><YoutubeIcon /></ButtonBase>
                     </a>
-                </Link>
+                </Link> */}
 
                 {/* optional: GitHub */}
                 {/* <Link href="https://github.com/codestation21">
