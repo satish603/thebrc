@@ -10,6 +10,7 @@ import Work_8 from"Assets/portfolio/digivala.png"
 import Work_9 from"Assets/portfolio/gita_2.png"
 import Work_10 from"Assets/portfolio/payzo.png"
 import Work_11 from"Assets/portfolio/graphics.png"
+import Work_12 from"Assets/portfolio/orvexa.png"
 import Graphic_1 from "Assets/portfolio/graphics/1.png";
 import Graphic_2 from "Assets/portfolio/graphics/2.png";
 import Graphic_3 from "Assets/portfolio/graphics/3.png";
@@ -38,6 +39,12 @@ export default [
         image: Work_6,
         url: "https://byxbytemedia.brchub.me/"
     },
+    {
+        name: "Web Development",
+        filter: "web",
+        image: Work_12,
+        url: "https://orvexa.brchub.me/"
+    }, 
     {
         name: "Web Development",
         filter: "web",
